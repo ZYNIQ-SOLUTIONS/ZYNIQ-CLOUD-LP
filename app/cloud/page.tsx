@@ -29,7 +29,7 @@ import ScrollProgress from '@/components/ScrollProgress'
 import CookieBanner from '@/components/CookieBanner'
 import Footer from '@/components/Footer'
 import PreFooterSecurity from '@/components/PreFooterSecurity'
-import CloudVisual from '@/components/HeroVisuals/CloudVisual'
+import SovereignCloudConsole from '@/components/HeroVisuals/SovereignCloudConsole'
 import WaitlistForm from '@/components/WaitlistForm'
 import TiltCard from '@/components/TiltCard'
 
@@ -87,58 +87,87 @@ export default function CloudPage() {
 /* ================================================================== */
 function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white">
-      <CloudVisual />
+    <section className="relative pt-24 pb-20 md:pt-32 md:pb-28 bg-white border-b border-slate-100 overflow-hidden">
+      {/* Precision architectural grid background */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#0f172a06_1px,transparent_1px),linear-gradient(to_bottom,#0f172a06_1px,transparent_1px)] bg-[size:3rem_3rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_80%,transparent_100%)] pointer-events-none" />
 
-      {/* Floating security icons */}
-      <div className="absolute top-32 right-[10%] opacity-[0.04] pointer-events-none">
-        <Shield className="w-40 h-40 text-slate-800" />
-      </div>
-      <div className="absolute bottom-40 left-[8%] opacity-[0.04] pointer-events-none">
-        <Lock className="w-32 h-32 text-slate-800" />
-      </div>
+      {/* Subtle top ambient radial fill */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 max-w-5xl h-96 bg-gradient-to-b from-slate-100/50 to-transparent blur-3xl pointer-events-none -z-0" />
 
-      <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
-        <motion.div {...fadeUp(0.2)} className="mb-6 flex justify-center">
-          <img src="/brand/ZYNIQ_SIGN_LOGO_BLACK.svg" alt="ZYNIQ" className="h-22 w-22 md:h-28 md:w-28 object-contain" />
-        </motion.div>
+      <div className="relative z-10 container mx-auto px-6 max-w-7xl">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+          {/* Left Column: Value Proposition & Action */}
+          <div className="lg:col-span-6 text-left">
+            <motion.div {...fadeUp(0.1)} className="mb-6 inline-flex">
+              <div className="inline-flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-slate-900/[0.04] border border-slate-900/[0.08] text-slate-700 text-xs font-jetbrains">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                <span className="font-semibold text-slate-900">Sovereign Engine v4.2</span>
+                <span className="text-slate-300">/</span>
+                <span className="text-slate-600">Zero-Trust Guarded</span>
+              </div>
+            </motion.div>
 
-        <motion.div {...fadeUp(0.4)} className="mb-6 flex justify-center">
-          <img src="/brand/CLOUD_TEXT_LOGO.svg" alt="CLOUD" className="h-14 md:h-20 lg:h-24 w-auto object-contain" />
-        </motion.div>
+            <motion.h1
+              {...fadeUp(0.25)}
+              className="text-4xl sm:text-5xl lg:text-[3.5rem] font-orbitron font-black leading-[1.08] tracking-tight text-slate-900 mb-6"
+            >
+              Sovereign cloud compute.
+              <br />
+              <span className="text-slate-500 font-extrabold">
+                Zero dependencies.
+              </span>
+            </motion.h1>
 
-        <motion.h1
-          {...fadeUp(0.6)}
-          className="text-3xl md:text-5xl lg:text-6xl font-orbitron font-black leading-tight tracking-tight text-slate-900 mb-6"
-        >
-          SOVEREIGN CLOUD.
-          <br />
-          <span className="text-zyniq-red">DARK MATTER</span> SECURITY.
-        </motion.h1>
+            <motion.p
+              {...fadeUp(0.4)}
+              className="text-base sm:text-lg text-slate-600 font-space leading-relaxed mb-8 max-w-xl"
+            >
+              Deploy self-healing Kubernetes clusters, dedicated vCPUs, and bare-metal NVMe storage protected by autonomous Dark Matter threat defense. Engineered for complete data sovereignty.
+            </motion.p>
 
-        <motion.p
-          {...fadeUp(0.8)}
-          className="text-lg md:text-xl text-slate-500 font-space mb-10 max-w-3xl mx-auto leading-relaxed"
-        >
-          A modern smart cloud provider built for everyone — from seasoned DevOps
-          engineers to someone deploying for the first time. Enterprise-grade infrastructure
-          wrapped in simplicity. Protected by AI.
-        </motion.p>
+            <motion.div {...fadeUp(0.55)} className="flex flex-wrap items-center gap-3.5 mb-10">
+              <a
+                href="#deploy-cloud"
+                className="inline-flex items-center justify-center gap-2.5 bg-slate-900 hover:bg-black text-white px-7 py-3.5 rounded-lg font-space font-medium text-sm transition-all shadow-sm hover:shadow"
+              >
+                <span>Deploy Cluster</span>
+                <ArrowRight className="w-4 h-4 text-slate-400" />
+              </a>
+              <a
+                href="#services"
+                className="inline-flex items-center justify-center gap-2 border border-slate-300/80 hover:border-slate-400 text-slate-800 bg-white/80 hover:bg-slate-50 px-6 py-3.5 rounded-lg font-space font-medium text-sm transition-colors"
+              >
+                <span>Explore Architecture</span>
+              </a>
+            </motion.div>
 
-        <motion.div {...fadeUp(1)} className="flex flex-wrap items-center justify-center gap-4">
-          <a
-            href="#deploy-cloud"
-            className="inline-flex items-center gap-2 bg-zyniq-red hover:bg-red-700 text-white px-8 py-4 font-orbitron font-bold text-sm tracking-wider uppercase transition-all shadow-lg shadow-red-500/15 cursor-none-target"
+            {/* Micro Trust & SLA Strip */}
+            <motion.div {...fadeUp(0.7)} className="grid grid-cols-3 gap-6 pt-7 border-t border-slate-200/80 max-w-lg">
+              <div>
+                <div className="font-jetbrains text-xl font-bold text-slate-900 tabular-nums">99.999%</div>
+                <div className="text-xs font-space text-slate-500 mt-0.5">Uptime SLA</div>
+              </div>
+              <div>
+                <div className="font-jetbrains text-xl font-bold text-slate-900 tabular-nums">&lt;5ms</div>
+                <div className="text-xs font-space text-slate-500 mt-0.5">Edge Latency</div>
+              </div>
+              <div>
+                <div className="font-jetbrains text-xl font-bold text-slate-900 tabular-nums">12+</div>
+                <div className="text-xs font-space text-slate-500 mt-0.5">Sovereign Zones</div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Right Column: Sovereign Cloud Console Moment */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.96, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:col-span-6 w-full"
           >
-            LAUNCH YOUR CLOUD <ArrowRight className="w-4 h-4" />
-          </a>
-          <a
-            href="#services"
-            className="inline-flex items-center gap-2 border border-slate-300 hover:border-zyniq-red text-slate-700 hover:text-zyniq-red px-8 py-4 font-orbitron font-bold text-sm tracking-wider uppercase transition-all cursor-none-target"
-          >
-            EXPLORE SERVICES
-          </a>
-        </motion.div>
+            <SovereignCloudConsole />
+          </motion.div>
+        </div>
       </div>
     </section>
   )
@@ -546,7 +575,7 @@ function PricingTiers() {
               </div>
               <a
                 href="#deploy-cloud"
-                className={`block text-center py-3 font-orbitron font-bold text-sm tracking-wider uppercase transition-all cursor-none-target ${
+                className={`block text-center py-3 font-orbitron font-bold text-sm tracking-wider uppercase transition-all rounded-lg ${
                   plan.popular
                     ? 'bg-zyniq-red hover:bg-red-700 text-white'
                     : 'border border-slate-200 hover:border-zyniq-red text-slate-700 hover:text-zyniq-red'
