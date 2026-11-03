@@ -1,0 +1,786 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Font Imports */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-zyniq-black text-zyniq-white font-space antialiased;
+  cursor: none;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-zyniq-black;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-zyniq-red;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ff3333;
+}
+
+/* Selection */
+::selection {
+  @apply bg-zyniq-red text-zyniq-white;
+}
+
+::-moz-selection {
+  @apply bg-zyniq-red text-zyniq-white;
+}
+
+/* Cursor Styles */
+.cursor-none-target {
+  cursor: none !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   ZYNIQ SIGNATURE DESIGN SYSTEM — "PRECISION AESTHETIC"
+   ═══════════════════════════════════════════════════════════ */
+
+/* Page Texture — refined noise grain */
+.page-texture {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.4'/%3E%3C/svg%3E");
+  opacity: 0.08;
+  pointer-events: none;
+  z-index: 0;
+  mix-blend-mode: multiply;
+}
+
+/* Grid Background — subtle blueprint feel */
+.bg-grid {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 40px 40px;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ─── TILT CARD — 3D Parallax Wrapper ─── */
+.tilt-card {
+  --glare-x: 50%;
+  --glare-y: 50%;
+  --glare-opacity: 0;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.tilt-card:hover {
+  transition-duration: 0.1s; /* Fast response while hovering */
+}
+
+.tilt-glare {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+  border-radius: inherit;
+  background: radial-gradient(
+    320px circle at var(--glare-x) var(--glare-y),
+    rgba(255, 255, 255, 0.12),
+    transparent 60%
+  );
+  opacity: var(--glare-opacity);
+  transition: opacity 0.4s ease;
+  mix-blend-mode: overlay;
+}
+
+/* Light theme glare uses darker tint */
+.card-light > .tilt-glare {
+  background: radial-gradient(
+    320px circle at var(--glare-x) var(--glare-y),
+    rgba(234, 35, 35, 0.06),
+    transparent 60%
+  );
+  mix-blend-mode: normal;
+}
+
+/* ─── GLASS CARD — Signature Zyniq Card ─── */
+.glass-card {
+  @apply bg-white/[0.04] backdrop-blur-xl border border-white/[0.08];
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(234, 35, 35, 0.4), transparent);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 1;
+}
+
+/* When inside tilt-card, disable glass-card's own transform (tilt handles it) */
+.tilt-card > .glass-card:hover,
+.tilt-card > .card-light:hover {
+  transform: none !important;
+}
+
+.glass-card:hover {
+  @apply border-zyniq-red/60 bg-white/[0.08];
+  box-shadow: 
+    0 0 30px rgba(234, 35, 35, 0.15),
+    0 20px 60px -15px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transform: translateY(-2px);
+}
+
+.glass-card:hover::before {
+  opacity: 1;
+}
+
+/* ─── LIGHT THEME CARD (for /solutions) ─── */
+.card-light {
+  @apply bg-white border border-black/[0.08];
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.card-light::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #EA2323, transparent);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 1;
+}
+
+.card-light::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(234, 35, 35, 0.03) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.card-light:hover {
+  border-color: rgba(234, 35, 35, 0.3);
+  box-shadow: 
+    0 20px 60px -15px rgba(234, 35, 35, 0.12),
+    0 4px 20px rgba(0, 0, 0, 0.06);
+  transform: translateY(-3px);
+}
+
+.card-light:hover::before {
+  opacity: 1;
+}
+
+.card-light:hover::after {
+  opacity: 1;
+}
+
+/* ─── GHOST BUTTON — Signature CTA ─── */
+.btn-ghost {
+  @apply border border-zyniq-red text-zyniq-red px-6 py-3 rounded-none font-orbitron font-bold text-sm tracking-wider uppercase;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.btn-ghost::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(234, 35, 35, 0.2), transparent);
+  transition: left 0.6s ease;
+}
+
+.btn-ghost::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #EA2323;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: -1;
+}
+
+.btn-ghost:hover::before {
+  left: 100%;
+}
+
+.btn-ghost:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.btn-ghost:hover {
+  @apply text-zyniq-white border-zyniq-red;
+  box-shadow: 0 0 30px rgba(234, 35, 35, 0.4);
+}
+
+/* ─── SECTION TITLE ─── */
+.section-title {
+  @apply font-orbitron font-bold tracking-[0.3em] text-xs md:text-sm text-neutral-300 uppercase;
+}
+
+/* ─── HERO TITLE ─── */
+.hero-title {
+  @apply font-orbitron font-black text-5xl md:text-7xl lg:text-9xl leading-none tracking-tight;
+}
+
+/* ─── GLITCH EFFECT ─── */
+.glitch {
+  position: relative;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch::before {
+  left: 2px;
+  text-shadow: -2px 0 #EA2323;
+  clip: rect(44px, 450px, 56px, 0);
+  animation: glitch-anim 5s infinite linear alternate-reverse;
+}
+
+.glitch::after {
+  left: -2px;
+  text-shadow: -2px 0 #00fff9;
+  clip: rect(44px, 450px, 56px, 0);
+  animation: glitch-anim2 5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+  0% { clip: rect(10px, 9999px, 31px, 0); transform: skew(0.5deg); }
+  5% { clip: rect(70px, 9999px, 71px, 0); transform: skew(0.1deg); }
+  10% { clip: rect(60px, 9999px, 96px, 0); transform: skew(0.3deg); }
+  15% { clip: rect(10px, 9999px, 91px, 0); transform: skew(0.7deg); }
+  20% { clip: rect(40px, 9999px, 66px, 0); transform: skew(0.2deg); }
+  100% { clip: rect(50px, 9999px, 20px, 0); transform: skew(0deg); }
+}
+
+@keyframes glitch-anim2 {
+  0% { clip: rect(65px, 9999px, 100px, 0); transform: skew(0.3deg); }
+  5% { clip: rect(30px, 9999px, 36px, 0); transform: skew(0.5deg); }
+  10% { clip: rect(90px, 9999px, 76px, 0); transform: skew(0.1deg); }
+  15% { clip: rect(20px, 9999px, 61px, 0); transform: skew(0.4deg); }
+  20% { clip: rect(80px, 9999px, 86px, 0); transform: skew(0.6deg); }
+  100% { clip: rect(70px, 9999px, 30px, 0); transform: skew(0deg); }
+}
+
+/* ─── SPOTLIGHT EFFECT ─── */
+.spotlight {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(234, 35, 35, 0.12) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
+.glass-card:hover .spotlight {
+  opacity: 1;
+}
+
+/* ─── SCAN LINE ─── */
+.scan-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(234, 35, 35, 0.6), transparent);
+  animation: scan 4s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes scan {
+  0% { top: 0; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+/* ─── LOADING BAR ─── */
+.loading-bar {
+  height: 2px;
+  background: #EA2323;
+  transform-origin: left;
+  animation: loading 2s ease-in-out infinite;
+}
+
+@keyframes loading {
+  0%, 100% { transform: scaleX(0); }
+  50% { transform: scaleX(1); }
+}
+
+/* ─── CORNER MARKERS — Precision Engineering ─── */
+.corner-marker {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-color: rgba(255, 255, 255, 0.15);
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 2;
+}
+
+.corner-marker.tl { top: 8px; left: 8px; border-top: 2px solid; border-left: 2px solid; }
+.corner-marker.tr { top: 8px; right: 8px; border-top: 2px solid; border-right: 2px solid; }
+.corner-marker.bl { bottom: 8px; left: 8px; border-bottom: 2px solid; border-left: 2px solid; }
+.corner-marker.br { bottom: 8px; right: 8px; border-bottom: 2px solid; border-right: 2px solid; }
+
+.glass-card:hover .corner-marker {
+  @apply border-zyniq-red;
+  width: 18px;
+  height: 18px;
+}
+
+/* ─── ZYNIQ BADGE — Floating status chip ─── */
+.zyniq-badge {
+  @apply font-jetbrains text-[9px] tracking-wider uppercase;
+  padding: 3px 10px;
+  border: 1px solid rgba(234, 35, 35, 0.3);
+  background: rgba(234, 35, 35, 0.08);
+  color: #EA2323;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.zyniq-badge::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  background: #EA2323;
+  border-radius: 50%;
+  animation: pulse-dot 2s infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.7); }
+}
+
+/* ─── SECTION DIVIDER — Horizontal accent ─── */
+.section-divider {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, #EA2323, transparent);
+  margin: 0 auto;
+}
+
+/* ─── RED GLOW ─── */
+.red-glow {
+  box-shadow: 
+    0 0 20px rgba(234, 35, 35, 0.4),
+    0 0 60px rgba(234, 35, 35, 0.15);
+}
+
+/* ─── UTILITY CLASSES ─── */
+.text-shadow-red {
+  text-shadow: 0 0 30px rgba(234, 35, 35, 0.6);
+}
+
+.border-glow {
+  box-shadow: inset 0 0 10px rgba(234, 35, 35, 0.3);
+}
+
+/* ─── ANIMATED GRADIENT BORDER (Signature Touch) ─── */
+.gradient-border {
+  position: relative;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(135deg, #EA2323, transparent 40%, transparent 60%, #EA2323);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.gradient-border:hover::before {
+  opacity: 0.6;
+}
+
+/* ─── DATA STREAM ANIMATION ─── */
+@keyframes data-stream {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 0% 100%; }
+}
+
+.data-stream {
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(234, 35, 35, 0.03) 2px,
+    rgba(234, 35, 35, 0.03) 4px
+  );
+  background-size: 100% 8px;
+  animation: data-stream 2s linear infinite;
+}
+
+/* ─── STAT COUNTER HIGHLIGHT ─── */
+.stat-value {
+  background: linear-gradient(135deg, #EA2323, #ff4444);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   ZYNIQ LOADING SCREEN — "BOOT SEQUENCE"
+   ═══════════════════════════════════════════════════════════ */
+
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #050505;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* ── Grid Background ── */
+.loader-grid {
+  position: absolute;
+  inset: 0;
+  width: 200%;
+  height: 200%;
+  top: -50%;
+  left: -50%;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  transform: perspective(600px) rotateX(55deg);
+  animation: loaderGridMove 18s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes loaderGridMove {
+  0%   { transform: perspective(600px) rotateX(55deg) translateY(0); }
+  100% { transform: perspective(600px) rotateX(55deg) translateY(60px); }
+}
+
+/* ── Noise overlay ── */
+.loader-noise {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+  opacity: 0.06;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+}
+
+/* ── Orbiting rings ── */
+.loader-orbits {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.orbit {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid transparent;
+}
+
+.orbit-1 {
+  width: 420px;
+  height: 420px;
+  border-color: rgba(255,255,255,0.06);
+  border-style: dashed;
+  animation: orbitSpin 22s linear infinite;
+}
+
+.orbit-2 {
+  width: 560px;
+  height: 560px;
+  border-color: rgba(234,35,35,0.1);
+  border-style: dashed;
+  animation: orbitSpin 30s linear infinite reverse;
+}
+
+@keyframes orbitSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ── Center column ── */
+.loader-center {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  width: 90vw;
+  max-width: 560px;
+}
+
+/* ── Logo wrappers ── */
+.logo-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 32px;
+}
+
+.logo-full .logo-svg {
+  width: 100%;
+  max-width: 480px;
+  height: auto;
+}
+
+.logo-sign .logo-svg {
+  width: 120px;
+  height: auto;
+  margin-bottom: 28px;
+}
+
+/* ── SVG draw animation — FULL LOGO ── */
+.draw-path {
+  stroke-dasharray: 6000;
+  stroke-dashoffset: 6000;
+  stroke-width: 12;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill-opacity: 0;
+  animation:
+    drawStroke 2.4s cubic-bezier(0.16,1,0.3,1) forwards,
+    fillShape  1s   ease-out 2s forwards;
+}
+
+.white-path {
+  stroke: #ffffff;
+  fill: #ffffff;
+}
+
+.red-path {
+  stroke: #EA2323;
+  fill: #EA2323;
+}
+
+/* Stagger each letter */
+.draw-path:nth-child(1) { animation-delay: 0.15s, 2s; }
+.draw-path:nth-child(2) { animation-delay: 0.30s, 2s; }
+.draw-path:nth-child(3) { animation-delay: 0.45s, 2s; }
+.draw-path:nth-child(4) { animation-delay: 0.60s, 2s; }
+.draw-path:nth-child(5) { animation-delay: 0.75s, 2s; }
+.draw-path:nth-child(6) { animation-delay: 0.90s, 2s; }
+
+@keyframes drawStroke {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes fillShape {
+  to { fill-opacity: 1; stroke-width: 0; }
+}
+
+/* ── SVG draw animation — SIGN LOGO ── */
+.draw-path-sign {
+  stroke-dasharray: 3000;
+  stroke-dashoffset: 3000;
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill-opacity: 0;
+  animation:
+    drawStroke  1.8s cubic-bezier(0.16,1,0.3,1) forwards,
+    fillSignShape 0.8s ease-out 1.4s forwards;
+}
+
+.red-fill-path {
+  stroke: rgba(255,255,255,0.7);
+  fill: #EA2323;
+}
+
+.draw-path-sign:nth-child(1) { animation-delay: 0.1s, 1.4s; }
+.draw-path-sign:nth-child(2) { animation-delay: 0.3s, 1.6s; }
+
+@keyframes fillSignShape {
+  to { fill-opacity: 1; stroke-width: 0; }
+}
+
+/* ── Taglines ── */
+.loader-taglines {
+  text-align: center;
+}
+
+.tagline-primary {
+  font-family: 'Orbitron', monospace;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.85);
+  margin-bottom: 8px;
+}
+
+.tagline-secondary {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  color: rgba(255,255,255,0.45);
+}
+
+/* ── Loading bar ── */
+.loader-bar-wrap {
+  width: 100%;
+  margin-top: 36px;
+}
+
+.loader-bar-track {
+  position: relative;
+  width: 100%;
+  height: 2px;
+  background: rgba(255,255,255,0.06);
+  overflow: visible;
+}
+
+.loader-bar-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #EA2323 60%, #ff4444);
+  transition: width 80ms linear;
+  box-shadow: 0 0 12px rgba(234,35,35,0.5);
+}
+
+.loader-bar-tip {
+  position: absolute;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  background: #fff;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 10px rgba(234,35,35,0.8), 0 0 20px rgba(234,35,35,0.4);
+  transition: left 80ms linear;
+}
+
+.loader-bar-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.loader-pct {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  color: #EA2323;
+  letter-spacing: 0.1em;
+}
+
+.loader-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.25);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  animation: labelBlink 1.2s step-end infinite;
+}
+
+@keyframes labelBlink {
+  50% { opacity: 0.4; }
+}
+
+/* ── Terminal log ── */
+.loader-terminal {
+  width: 100%;
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-height: 100px;
+}
+
+.terminal-line {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.5);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: opacity 0.3s ease;
+}
+
+.terminal-line:last-child {
+  color: rgba(234,35,35,0.7);
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .logo-full .logo-svg { max-width: 320px; }
+  .logo-sign .logo-svg { width: 80px; }
+  .tagline-primary { font-size: 10px; letter-spacing: 0.12em; }
+  .tagline-secondary { font-size: 12px; }
+  .orbit-1 { width: 280px; height: 280px; }
+  .orbit-2 { width: 380px; height: 380px; }
+  .terminal-line { font-size: 8px; }
+  .loader-center { max-width: 340px; }
+}

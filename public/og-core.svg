@@ -1,0 +1,71 @@
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#050505"/>
+  
+  <!-- Grid Pattern -->
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#EA2323" stroke-width="0.5" opacity="0.2"/>
+    </pattern>
+    
+    <!-- Gradient for glow effects -->
+    <radialGradient id="redGlow">
+      <stop offset="0%" stop-color="#EA2323" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#EA2323" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  
+  <!-- Red glow effect -->
+  <circle cx="600" cy="315" r="400" fill="url(#redGlow)" opacity="0.15"/>
+  
+  <!-- 3D Z Logo (simplified voxel style) -->
+  <g transform="translate(150, 200)">
+    <!-- Front face -->
+    <path d="M 0 0 L 120 0 L 60 60 L 120 120 L 0 120 L 60 60 Z" fill="#EA2323"/>
+    <!-- Side face -->
+    <path d="M 120 0 L 160 20 L 100 80 L 60 60 Z" fill="#B01818" opacity="0.8"/>
+    <!-- Top face -->
+    <path d="M 0 0 L 60 60 L 100 40 L 40 -20 Z" fill="#FF3333" opacity="0.6"/>
+    <!-- Bottom faces -->
+    <path d="M 60 60 L 120 120 L 160 140 L 100 80 Z" fill="#8B1212"/>
+    <path d="M 0 120 L 60 60 L 100 80 L 40 140 Z" fill="#6B0F0F"/>
+  </g>
+  
+  <!-- Main heading -->
+  <text x="350" y="230" font-family="Orbitron, sans-serif" font-size="72" font-weight="900" fill="#FFFFFF" letter-spacing="4">
+    ZYNIQ
+  </text>
+  
+  <!-- Subtitle -->
+  <text x="350" y="290" font-family="Orbitron, sans-serif" font-size="42" font-weight="700" fill="#EA2323" letter-spacing="2">
+    THE SOVEREIGN STACK
+  </text>
+  
+  <!-- Description -->
+  <text x="350" y="350" font-family="Space Grotesk, sans-serif" font-size="24" fill="#999999" letter-spacing="1">
+    AI Infrastructure | GPU Clusters | Neural Forge
+  </text>
+  
+  <!-- Decorative line -->
+  <rect x="350" y="380" width="800" height="2" fill="#EA2323" opacity="0.5"/>
+  
+  <!-- Tagline -->
+  <text x="350" y="430" font-family="Space Grotesk, sans-serif" font-size="20" fill="#666666" letter-spacing="1">
+    WHERE MACHINES THINK. WHERE EMPIRES BUILD.
+  </text>
+  
+  <!-- Corner markers -->
+  <g opacity="0.6">
+    <path d="M 50 50 L 50 80 M 50 50 L 80 50" stroke="#EA2323" stroke-width="3" fill="none"/>
+    <path d="M 1150 50 L 1150 80 M 1150 50 L 1120 50" stroke="#EA2323" stroke-width="3" fill="none"/>
+    <path d="M 50 580 L 50 550 M 50 580 L 80 580" stroke="#EA2323" stroke-width="3" fill="none"/>
+    <path d="M 1150 580 L 1150 550 M 1150 580 L 1120 580" stroke="#EA2323" stroke-width="3" fill="none"/>
+  </g>
+  
+  <!-- Domain -->
+  <text x="1050" y="600" font-family="JetBrains Mono, monospace" font-size="16" fill="#EA2323" text-anchor="end">
+    zyniq.core
+  </text>
+</svg>

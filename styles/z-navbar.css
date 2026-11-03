@@ -1,0 +1,559 @@
+/* ============================================================
+   ZYNIQ Navbar & Menu — z-navbar.css v1.0.0
+   Reusable architectural navbar with full-screen menu modal.
+   Uses z-tokens.css custom properties. Zero rounded corners.
+   ============================================================ */
+
+/* ── CSS Variables (scoped) ────────────────────────────────── */
+.z-navbar,
+.z-menu-modal {
+  --z-nav-height: 64px;
+  --z-nav-product: var(--z-brand-red, #EA2323);
+  --z-nav-bg: var(--z-brand-white, #ffffff);
+  --z-nav-text: var(--z-brand-black, #050505);
+  --z-nav-line: var(--z-gray-400, #a1a1aa);
+  --z-nav-glass: rgba(255, 255, 255, 0.8);
+  --z-nav-speed: 0.6s;
+  --z-nav-ease: cubic-bezier(0.19, 1, 0.22, 1);
+  --z-nav-font-main: var(--z-font-body, 'Inter', sans-serif);
+  --z-nav-font-mono: var(--z-font-code, 'JetBrains Mono', monospace);
+  --z-nav-font-heading: var(--z-font-heading, 'Orbitron', sans-serif);
+}
+
+/* ── Architectural Reset: No Rounded Corners ───────────────── */
+.z-navbar *,
+.z-menu-modal * {
+  border-radius: 0 !important;
+}
+
+/* ================================================================
+   NAVBAR BAR
+   ================================================================ */
+.z-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--z-nav-height);
+  background: var(--z-nav-bg);
+  border-bottom: 1px solid var(--z-nav-line);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 2000;
+  padding: 0 20px;
+  font-family: var(--z-nav-font-main);
+}
+
+/* ── Logo ──────────────────────────────────────────────────── */
+.z-navbar__logo {
+  height: calc(var(--z-nav-height) - 14px);
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  z-index: 2005;
+  background: var(--z-nav-bg);
+  padding-right: 15px;
+  margin-top: 7px;
+  margin-bottom: 7px;
+}
+
+.z-navbar__logo-img {
+  height: 36px;
+  width: auto;
+  object-fit: contain;
+  transition: filter 0.3s ease;
+}
+
+/* ── Logo Switcher ─────────────────────────────────────────── */
+.z-navbar__switcher {
+  position: absolute;
+  top: 0;
+  left: 70px;
+  width: 0;
+  height: calc(var(--z-nav-height) - 1px);
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  display: flex;
+  align-items: center;
+  padding: 0;
+  gap: 20px;
+  transition:
+    width var(--z-nav-speed) var(--z-nav-ease),
+    opacity 0.3s ease;
+  overflow: hidden;
+  opacity: 0;
+  white-space: nowrap;
+  border: none;
+  z-index: 2001;
+}
+
+.z-navbar__switcher--active {
+  width: min(420px, calc(100% - 140px));
+  opacity: 1;
+  padding: 0 25px;
+}
+
+.z-navbar__switcher-item {
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  opacity: 0.4;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.z-navbar__switcher-item:hover {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+.z-navbar__switcher-item svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* ── Hamburger Trigger ─────────────────────────────────────── */
+.z-navbar__trigger {
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 6px;
+  z-index: 2002;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.z-navbar__trigger span {
+  display: block;
+  height: 2px;
+  background: var(--z-nav-text);
+  transition: all 0.4s var(--z-nav-ease);
+}
+
+.z-navbar__trigger span:nth-child(1) { width: 32px; }
+.z-navbar__trigger span:nth-child(2) { width: 18px; }
+.z-navbar__trigger span:nth-child(3) { width: 24px; }
+
+.z-navbar__trigger--active span:nth-child(1) {
+  width: 32px;
+  transform: translateY(8px) rotate(45deg);
+}
+
+.z-navbar__trigger--active span:nth-child(2) {
+  opacity: 0;
+  transform: translateX(10px);
+}
+
+.z-navbar__trigger--active span:nth-child(3) {
+  width: 32px;
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* ================================================================
+   FULL-SCREEN MENU MODAL
+   ================================================================ */
+.z-menu-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.03);
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.6s var(--z-nav-ease);
+  z-index: 1500;
+  font-family: var(--z-nav-font-main);
+}
+
+.z-menu-modal--active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ── Modal Content Box ─────────────────────────────────────── */
+.z-menu-modal__content {
+  background: var(--z-nav-glass);
+  border: 1px solid var(--z-nav-text);
+  width: 96%;
+  max-width: 1400px;
+  height: 85vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 40px 40px 0px rgba(0, 0, 0, 0.08);
+  position: relative;
+  transform: translateY(40px);
+  transition: transform 0.8s var(--z-nav-ease);
+  overflow: hidden;
+}
+
+.z-menu-modal--active .z-menu-modal__content {
+  transform: translateY(0);
+}
+
+/* ── Modal Body Grid ───────────────────────────────────────── */
+.z-menu-modal__body {
+  flex: 1;
+  display: grid;
+  grid-template-columns: clamp(120px, 15vw, 220px) 1fr clamp(120px, 15vw, 220px);
+  overflow: hidden;
+}
+
+/* ── Sidebars ──────────────────────────────────────────────── */
+.z-menu-sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+  gap: 12px;
+  background: rgba(0, 0, 0, 0.015);
+  z-index: 10;
+}
+
+.z-menu-sidebar--left {
+  border-right: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.z-menu-sidebar--right {
+  border-left: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.z-menu-sidebar__btn {
+  background: transparent;
+  border: 1px solid var(--z-nav-text);
+  color: var(--z-nav-text);
+  padding: 14px 10px;
+  font-family: var(--z-nav-font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  text-decoration: none;
+  text-align: center;
+  transition: all 0.4s var(--z-nav-ease);
+  opacity: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  cursor: pointer;
+}
+
+.z-menu-modal--active .z-menu-sidebar__btn {
+  opacity: 0.65;
+}
+
+.z-menu-sidebar__btn:hover {
+  opacity: 1 !important;
+  background: var(--z-nav-text);
+  color: #fff;
+  transform: translate(4px, -4px);
+  box-shadow: -4px 4px 0 var(--z-nav-product);
+}
+
+/* ── ATS Checker Button Highlight ──────────────────────────── */
+.z-menu-sidebar__btn--highlight {
+  background: var(--z-nav-product) !important;
+  color: white !important;
+  border: 2px solid var(--z-nav-product) !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.8px !important;
+}
+
+.z-menu-modal--active .z-menu-sidebar__btn--highlight {
+  opacity: 0.85 !important;
+}
+
+.z-menu-sidebar__btn--highlight:hover {
+  background: rgba(0, 0, 0, 0.1) !important;
+  color: var(--z-nav-text) !important;
+  transform: translate(4px, -4px) scale(1.02) !important;
+  box-shadow: -4px 4px 0 rgba(0, 0, 0, 0.15) !important;
+}
+
+/* ── Center Hub ────────────────────────────────────────────── */
+.z-menu-hub {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  overflow: hidden;
+}
+
+.z-menu-hub__decor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.08;
+}
+
+.z-menu-hub__decor svg {
+  width: 100%;
+  height: 100%;
+}
+
+.z-menu-hub__decor line {
+  stroke: var(--z-nav-text);
+  stroke-width: 0.5;
+  stroke-dasharray: 4;
+}
+
+.z-menu-hub__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  z-index: 2;
+}
+
+.z-menu-hub__column {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Nodes ─────────────────────────────────────────────────── */
+.z-menu-hub__node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.z-menu-modal--active .z-menu-hub__node {
+  animation: z-nav-nodeIn 0.8s var(--z-nav-ease) forwards;
+}
+
+.z-menu-hub__node:nth-child(1) { animation-delay: 0.4s; }
+.z-menu-hub__node:nth-child(2) { animation-delay: 0.5s; }
+
+@keyframes z-nav-nodeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.z-menu-hub__node-icon {
+  width: 60px;
+  height: 60px;
+  border: 1px solid var(--z-nav-line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  transition: all 0.4s var(--z-nav-ease);
+}
+
+.z-menu-hub__node:hover .z-menu-hub__node-icon {
+  border-color: var(--z-nav-text);
+  transform: scale(1.1);
+  box-shadow: 6px 6px 0 var(--z-nav-product);
+}
+
+.z-menu-hub__node-icon svg {
+  width: 24px;
+  height: 24px;
+  stroke: var(--z-nav-text);
+  fill: none;
+  stroke-width: 1.5;
+}
+
+.z-menu-hub__node-text {
+  margin-top: 10px;
+  font-size: 9px;
+  font-family: var(--z-nav-font-mono);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #777;
+}
+
+/* ── Center Logo ───────────────────────────────────────────── */
+.z-menu-hub__center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.z-menu-hub__center-logo {
+  width: clamp(80px, 12vw, 160px);
+  height: auto;
+  object-fit: contain;
+  transition: transform 0.8s var(--z-nav-ease);
+}
+
+.z-menu-hub__center:hover .z-menu-hub__center-logo {
+  transform: rotate(90deg) scale(1.1);
+}
+
+/* ── Modal Footer ──────────────────────────────────────────── */
+.z-menu-modal__footer {
+  padding: 15px 30px;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--z-nav-font-mono);
+  font-size: 9px;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ================================================================
+   DARK THEME VARIANT
+   ================================================================ */
+.z-navbar--dark,
+.z-navbar--dark ~ .z-menu-modal {
+  --z-nav-bg: var(--z-brand-black, #050505);
+  --z-nav-text: var(--z-brand-white, #ffffff);
+  --z-nav-line: rgba(255, 255, 255, 0.15);
+  --z-nav-glass: rgba(5, 5, 5, 0.85);
+}
+
+.z-navbar--dark .z-navbar__switcher {
+  background: rgba(5, 5, 5, 0.6);
+}
+
+.z-navbar--dark ~ .z-menu-modal .z-menu-modal__content {
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 40px 40px 0px rgba(234, 35, 35, 0.08);
+}
+
+.z-navbar--dark ~ .z-menu-modal .z-menu-sidebar {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.z-navbar--dark ~ .z-menu-modal .z-menu-sidebar--left {
+  border-right-color: rgba(255, 255, 255, 0.05);
+}
+
+.z-navbar--dark ~ .z-menu-modal .z-menu-sidebar--right {
+  border-left-color: rgba(255, 255, 255, 0.05);
+}
+
+.z-navbar--dark ~ .z-menu-modal .z-menu-sidebar__btn {
+  border-color: rgba(255, 255, 255, 0.3);
+  color: var(--z-brand-white);
+}
+
+.z-navbar--dark ~ .z-menu-modal .z-menu-sidebar__btn:hover {
+  background: var(--z-brand-white);
+  color: var(--z-brand-black);
+}
+
+.z-navbar--dark ~ .z-menu-modal .z-menu-hub__node-icon {
+  background: var(--z-surface-elevated, #18181b);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.z-navbar--dark ~ .z-menu-modal .z-menu-hub__node-icon svg {
+  stroke: var(--z-brand-white);
+}
+
+.z-navbar--dark ~ .z-menu-modal .z-menu-hub__node-text {
+  color: var(--z-text-muted, #71717a);
+}
+
+.z-navbar--dark ~ .z-menu-modal .z-menu-hub__decor line {
+  stroke: var(--z-brand-white);
+}
+
+.z-navbar--dark ~ .z-menu-modal .z-menu-modal__footer {
+  border-top-color: rgba(255, 255, 255, 0.05);
+  color: var(--z-text-muted, #71717a);
+}
+
+/* ================================================================
+   RESPONSIVE — TABLET
+   ================================================================ */
+@media (max-width: 850px) {
+  .z-menu-modal__body {
+    grid-template-columns: 80px 1fr 80px;
+  }
+
+  .z-menu-sidebar {
+    padding: 10px 5px;
+    gap: 8px;
+  }
+
+  .z-menu-sidebar__btn {
+    font-size: 8px;
+    padding: 12px 4px;
+    letter-spacing: 0.5px;
+    border-width: 1px;
+  }
+
+  .z-menu-hub__column {
+    gap: 40px;
+  }
+
+  .z-menu-hub__node-icon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .z-menu-hub__node-text {
+    font-size: 7px;
+  }
+
+  .z-menu-hub__center-logo {
+    width: 70px;
+  }
+
+  .z-menu-modal__content {
+    height: 90vh;
+    width: 98%;
+  }
+
+  .z-navbar__switcher--active {
+    width: calc(100% - 110px);
+  }
+}
+
+/* ================================================================
+   RESPONSIVE — MOBILE
+   ================================================================ */
+@media (max-width: 480px) {
+  .z-menu-modal__body {
+    grid-template-columns: 65px 1fr 65px;
+  }
+
+  .z-menu-sidebar__btn {
+    padding: 10px 2px;
+    letter-spacing: 0;
+  }
+
+  .z-menu-modal__footer {
+    font-size: 7px;
+    flex-direction: column;
+    gap: 5px;
+    text-align: center;
+  }
+}

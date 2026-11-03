@@ -1,0 +1,252 @@
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <!-- Light Background -->
+  <rect width="1200" height="630" fill="#FAFAFA"/>
+  
+  <!-- Subtle grid -->
+  <defs>
+    <pattern id="lightGrid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#E0E0E0" stroke-width="1"/>
+    </pattern>
+    
+    <linearGradient id="cardGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#F5F5F5"/>
+    </linearGradient>
+    
+    <linearGradient id="redGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF4444"/>
+      <stop offset="100%" stop-color="#EA2323"/>
+    </linearGradient>
+    
+    <filter id="shadow1" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="8"/>
+      <feOffset dx="0" dy="10" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.15"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <rect width="1200" height="630" fill="url(#lightGrid)"/>
+  
+  <!-- Large Hero Card -->
+  <g filter="url(#shadow1)">
+    <rect x="60" y="60" width="580" height="510" rx="16" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="2"/>
+    
+    <!-- ZYNIQ Z Logo (Red Square with White Z) -->
+    <rect x="90" y="90" width="80" height="80" fill="#EA2323"/>
+    <text x="130" y="150" font-family="Orbitron, sans-serif" font-size="56" font-weight="900" fill="#FFFFFF" text-anchor="middle">Z</text>
+    
+    <!-- ZYNIQ SOLUTIONS Text -->
+    <text x="90" y="210" font-family="Orbitron, sans-serif" font-size="48" font-weight="900" fill="#111111" letter-spacing="2">
+      ZYNIQ
+    </text>
+    <text x="90" y="250" font-family="Orbitron, sans-serif" font-size="32" font-weight="700" fill="#EA2323" letter-spacing="2">
+      SOLUTIONS
+    </text>
+    
+    <!-- Tagline -->
+    <text x="90" y="310" font-family="Space Grotesk, sans-serif" font-size="26" font-weight="700" fill="#111111">
+      WE MANUFACTURE
+    </text>
+    <text x="90" y="345" font-family="Space Grotesk, sans-serif" font-size="26" font-weight="700" fill="#EA2323">
+      SUCCESS
+    </text>
+    
+    <!-- Description -->
+    <text x="90" y="395" font-family="Space Grotesk, sans-serif" font-size="16" fill="#666666">
+      Your Ambition. Our Intelligence.
+    </text>
+    <text x="90" y="425" font-family="Space Grotesk, sans-serif" font-size="16" fill="#666666">
+      Enterprise solutions powered by
+    </text>
+    <text x="90" y="455" font-family="Space Grotesk, sans-serif" font-size="16" fill="#666666">
+      synthetic precision.
+    </text>
+    
+    <!-- Stats -->
+    <g transform="translate(90, 495)">
+      <text font-family="Orbitron, sans-serif" font-size="22" font-weight="900" fill="#EA2323">500+</text>
+      <text x="0" y="28" font-family="JetBrains Mono, monospace" font-size="11" fill="#999999" letter-spacing="1">COMMANDERS</text>
+      
+      <text x="150" font-family="Orbitron, sans-serif" font-size="22" font-weight="900" fill="#EA2323">99.9%</text>
+      <text x="150" y="28" font-family="JetBrains Mono, monospace" font-size="11" fill="#999999" letter-spacing="1">SUCCESS</text>
+      
+      <text x="310" font-family="Orbitron, sans-serif" font-size="22" font-weight="900" fill="#EA2323">$2B+</text>
+      <text x="310" y="28" font-family="JetBrains Mono, monospace" font-size="11" fill="#999999" letter-spacing="1">VALUE CREATED</text>
+    </g>
+  </g>
+  
+  <!-- Bento Grid Cards (Right Side) -->
+  <g filter="url(#shadow1)">
+    <!-- Card 1 - AI Strategy -->
+    <rect x="680" y="60" width="460" height="150" rx="12" fill="url(#cardGrad1)" stroke="#E0E0E0" stroke-width="1"/>
+    <rect x="700" y="80" width="42" height="42" rx="6" fill="#FFEBEB"/>
+    <circle cx="721" cy="101" r="12" fill="none" stroke="#EA2323" stroke-width="2.5"/>
+    <path d="M 717 101 L 721 105 L 729 97" stroke="#EA2323" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="760" y="95" font-family="Orbitron, sans-serif" font-size="20" font-weight="700" fill="#111111">AI Strategy</text>
+    <text x="760" y="120" font-family="Space Grotesk, sans-serif" font-size="14" fill="#666666">Custom implementation</text>
+    <text x="760" y="142" font-family="Space Grotesk, sans-serif" font-size="14" fill="#666666">roadmaps for enterprise</text>
+    
+    <!-- Card 2 - Autonomous Agents (Red) -->
+    <rect x="680" y="230" width="220" height="165" rx="12" fill="url(#redGrad)"/>
+    <text x="700" y="275" font-family="Orbitron, sans-serif" font-size="36" font-weight="900" fill="#FFFFFF">AI</text>
+    <text x="700" y="315" font-family="Orbitron, sans-serif" font-size="20" font-weight="700" fill="#FFFFFF">AGENTS</text>
+    <rect x="700" y="330" width="40" height="2" fill="#FFFFFF" opacity="0.5"/>
+    <text x="700" y="355" font-family="Space Grotesk, sans-serif" font-size="13" fill="#FFFFFF" opacity="0.95">Execute complex</text>
+    <text x="700" y="375" font-family="Space Grotesk, sans-serif" font-size="13" fill="#FFFFFF" opacity="0.95">workflows</text>
+    
+    <!-- Card 3 - Custom Development -->
+    <rect x="920" y="230" width="220" height="165" rx="12" fill="url(#cardGrad1)" stroke="#E0E0E0" stroke-width="1"/>
+    <rect x="940" y="250" width="38" height="38" rx="6" fill="#FFEBEB"/>
+    <path d="M 950 269 L 954 269 L 954 273 L 950 273 Z M 960 265 L 964 265 L 964 277 L 960 277 Z" fill="#EA2323"/>
+    <text x="940" y="315" font-family="Orbitron, sans-serif" font-size="18" font-weight="700" fill="#111111">CUSTOM DEV</text>
+    <text x="940" y="343" font-family="Space Grotesk, sans-serif" font-size="12" fill="#666666">Full-stack software</text>
+    <text x="940" y="363" font-family="Space Grotesk, sans-serif" font-size="12" fill="#666666">manufacturing from</text>
+    <text x="940" y="383" font-family="Space Grotesk, sans-serif" font-size="12" fill="#666666">concept to production</text>
+    
+    <!-- Card 4 - Enterprise Stats -->
+    <rect x="680" y="415" width="460" height="155" rx="12" fill="url(#cardGrad1)" stroke="#E0E0E0" stroke-width="1"/>
+    
+    <text x="720" y="465" font-family="Orbitron, sans-serif" font-size="32" font-weight="900" fill="#111111">24/7</text>
+    <text x="720" y="492" font-family="JetBrains Mono, monospace" font-size="11" fill="#999999" letter-spacing="1">DEPLOYMENT</text>
+    
+    <text x="860" y="465" font-family="Orbitron, sans-serif" font-size="32" font-weight="900" fill="#111111">10+</text>
+    <text x="860" y="492" font-family="JetBrains Mono, monospace" font-size="11" fill="#999999" letter-spacing="1">INDUSTRIES</text>
+    
+    <text x="990" y="465" font-family="Orbitron, sans-serif" font-size="32" font-weight="900" fill="#EA2323">100%</text>
+    <text x="990" y="492" font-family="JetBrains Mono, monospace" font-size="11" fill="#999999" letter-spacing="1">SECURE</text>
+    
+    <rect x="700" y="510" width="420" height="1" fill="#E0E0E0"/>
+    
+    <text x="720" y="542" font-family="Space Grotesk, sans-serif" font-size="14" font-weight="600" fill="#111111">ENTERPRISE GRADE SECURITY</text>
+    <circle cx="1090" cy="537" r="4" fill="#00FF00"/>
+    <text x="1100" y="542" font-family="JetBrains Mono, monospace" font-size="11" fill="#666666">ACTIVE</text>
+  </g>
+  
+  <!-- Domain Watermark -->
+  <text x="1140" y="615" font-family="JetBrains Mono, monospace" font-size="14" fill="#999999" text-anchor="end">
+    zyniq.solutions
+  </text>
+</svg>
+  <!-- Light Background -->
+  <rect width="1200" height="630" fill="#FAFAFA"/>
+  
+  <!-- Subtle grid -->
+  <defs>
+    <pattern id="lightGrid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#E0E0E0" stroke-width="1"/>
+    </pattern>
+    
+    <!-- Gradient for cards -->
+    <linearGradient id="cardGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#F5F5F5"/>
+    </linearGradient>
+    
+    <linearGradient id="redGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF4444"/>
+      <stop offset="100%" stop-color="#EA2323"/>
+    </linearGradient>
+  </defs>
+  
+  <rect width="1200" height="630" fill="url(#lightGrid)"/>
+  
+  <!-- Large Hero Card with Brand Logo -->
+  <g filter="drop-shadow(0 10px 40px rgba(0,0,0,0.12))">
+    <rect x="60" y="60" width="580" height="510" rx="16" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="2"/>
+    
+    <!-- ZYNIQ Logo -->
+    <image href="/brand/ZYNIQ_SIGN_LOGO_RED.svg" x="90" y="90" width="80" height="80"/>
+    
+    <!-- SOLUTIONS Text Logo -->
+    <image href="/brand/SOLUTIONS_TEXT_LOGO.svg" x="90" y="190" width="280" height="60"/>
+    
+    <!-- Tagline -->
+    <text x="90" y="300" font-family="Space Grotesk, sans-serif" font-size="28" font-weight="700" fill="#111111">
+      WE MANUFACTURE
+    </text>
+    <text x="90" y="340" font-family="Space Grotesk, sans-serif" font-size="28" font-weight="700" fill="#EA2323">
+      SUCCESS
+    </text>
+    
+    <!-- Description -->
+    <text x="90" y="390" font-family="Space Grotesk, sans-serif" font-size="16" fill="#666666">
+      Your Ambition. Our Intelligence.
+    </text>
+    <text x="90" y="420" font-family="Space Grotesk, sans-serif" font-size="16" fill="#666666">
+      Enterprise solutions powered by
+    </text>
+    <text x="90" y="450" font-family="Space Grotesk, sans-serif" font-size="16" fill="#666666">
+      synthetic precision.
+    </text>
+    
+    <!-- Stats -->
+    <g transform="translate(90, 490)">
+      <text font-family="Orbitron, sans-serif" font-size="20" font-weight="900" fill="#EA2323">500+</text>
+      <text x="0" y="25" font-family="JetBrains Mono, monospace" font-size="10" fill="#999999">COMMANDERS</text>
+      
+      <text x="140" font-family="Orbitron, sans-serif" font-size="20" font-weight="900" fill="#EA2323">99.9%</text>
+      <text x="140" y="25" font-family="JetBrains Mono, monospace" font-size="10" fill="#999999">SUCCESS RATE</text>
+      
+      <text x="300" font-family="Orbitron, sans-serif" font-size="20" font-weight="900" fill="#EA2323">$2B+</text>
+      <text x="300" y="25" font-family="JetBrains Mono, monospace" font-size="10" fill="#999999">VALUE CREATED</text>
+    </g>
+  </g>
+  
+  <!-- Bento Grid Cards (Right Side) -->
+  <g filter="drop-shadow(0 4px 16px rgba(0,0,0,0.08))">
+    <!-- Card 1 - AI Strategy -->
+    <rect x="680" y="60" width="460" height="150" rx="12" fill="url(#cardGrad1)" stroke="#E0E0E0" stroke-width="1"/>
+    <rect x="700" y="80" width="40" height="40" rx="4" fill="url(#redGrad)" opacity="0.2"/>
+    <path d="M 715 95 L 720 100 L 715 105 M 710 100 L 720 100" stroke="#EA2323" stroke-width="2" fill="none"/>
+    <text x="755" y="95" font-family="Orbitron, sans-serif" font-size="18" font-weight="700" fill="#111111">AI Strategy</text>
+    <text x="755" y="120" font-family="Space Grotesk, sans-serif" font-size="13" fill="#666666">Custom implementation</text>
+    <text x="755" y="140" font-family="Space Grotesk, sans-serif" font-size="13" fill="#666666">roadmaps for enterprise</text>
+    
+    <!-- Card 2 - Autonomous Agents -->
+    <rect x="680" y="230" width="220" height="165" rx="12" fill="url(#redGrad)"/>
+    <text x="700" y="270" font-family="Orbitron, sans-serif" font-size="32" font-weight="900" fill="#FFFFFF">AI</text>
+    <text x="700" y="310" font-family="Orbitron, sans-serif" font-size="18" font-weight="700" fill="#FFFFFF">AGENTS</text>
+    <text x="700" y="340" font-family="Space Grotesk, sans-serif" font-size="12" fill="#FFFFFF" opacity="0.9">Execute complex</text>
+    <text x="700" y="360" font-family="Space Grotesk, sans-serif" font-size="12" fill="#FFFFFF" opacity="0.9">workflows</text>
+    <text x="700" y="380" font-family="Space Grotesk, sans-serif" font-size="12" fill="#FFFFFF" opacity="0.9">autonomously</text>
+    
+    <!-- Card 3 - Custom Development -->
+    <rect x="920" y="230" width="220" height="165" rx="12" fill="url(#cardGrad1)" stroke="#E0E0E0" stroke-width="1"/>
+    <rect x="940" y="250" width="36" height="36" rx="4" fill="url(#redGrad)" opacity="0.2"/>
+    <path d="M 950 265 L 956 268 L 950 271 M 962 265 L 968 268 L 962 271" stroke="#EA2323" stroke-width="2" fill="none"/>
+    <text x="940" y="310" font-family="Orbitron, sans-serif" font-size="16" font-weight="700" fill="#111111">CUSTOM</text>
+    <text x="940" y="335" font-family="Space Grotesk, sans-serif" font-size="12" fill="#666666">Full-stack software</text>
+    <text x="940" y="355" font-family="Space Grotesk, sans-serif" font-size="12" fill="#666666">manufacturing from</text>
+    <text x="940" y="375" font-family="Space Grotesk, sans-serif" font-size="12" fill="#666666">concept to production</text>
+    
+    <!-- Card 4 - Enterprise Grade -->
+    <rect x="680" y="415" width="460" height="155" rx="12" fill="url(#cardGrad1)" stroke="#E0E0E0" stroke-width="1"/>
+    
+    <!-- Stats Grid -->
+    <text x="720" y="460" font-family="Orbitron, sans-serif" font-size="28" font-weight="900" fill="#111111">24/7</text>
+    <text x="720" y="485" font-family="JetBrains Mono, monospace" font-size="11" fill="#999999">DEPLOYMENT</text>
+    
+    <text x="860" y="460" font-family="Orbitron, sans-serif" font-size="28" font-weight="900" fill="#111111">10+</text>
+    <text x="860" y="485" font-family="JetBrains Mono, monospace" font-size="11" fill="#999999">INDUSTRIES</text>
+    
+    <text x="990" y="460" font-family="Orbitron, sans-serif" font-size="28" font-weight="900" fill="#EA2323">100%</text>
+    <text x="990" y="485" font-family="JetBrains Mono, monospace" font-size="11" fill="#999999">SECURE</text>
+    
+    <rect x="700" y="505" width="420" height="1" fill="#E0E0E0"/>
+    
+    <text x="720" y="535" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="600" fill="#111111">ENTERPRISE GRADE SECURITY</text>
+    <circle cx="1090" cy="530" r="4" fill="#00FF00"/>
+    <text x="1100" y="535" font-family="JetBrains Mono, monospace" font-size="10" fill="#666666">ACTIVE</text>
+  </g>
+  
+  <!-- Domain -->
+  <text x="1140" y="615" font-family="JetBrains Mono, monospace" font-size="14" fill="#999999" text-anchor="end">
+    zyniq.solutions
+  </text>
+</svg>

@@ -1,0 +1,119 @@
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <!-- Dark Background -->
+  <rect width="1200" height="630" fill="#050505"/>
+  
+  <!-- Terminal grid background -->
+  <defs>
+    <pattern id="terminalGrid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#1A1A1A" stroke-width="1"/>
+    </pattern>
+    
+    <!-- Scanline effect -->
+    <pattern id="scanlines" width="1" height="4" patternUnits="userSpaceOnUse">
+      <rect width="1" height="2" fill="#000000" opacity="0.3"/>
+      <rect y="2" width="1" height="2" fill="transparent"/>
+    </pattern>
+    
+    <linearGradient id="terminalGlow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#EA2323" stop-opacity="0.2"/>
+      <stop offset="50%" stop-color="#EA2323" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#EA2323" stop-opacity="0.2"/>
+    </linearGradient>
+  </defs>
+  
+  <rect width="1200" height="630" fill="url(#terminalGrid)"/>
+  <rect width="1200" height="630" fill="url(#scanlines)" opacity="0.4"/>
+  
+  <!-- Terminal window -->
+  <g filter="drop-shadow(0 20px 50px rgba(234,35,35,0.3))">
+    <!-- Window frame -->
+    <rect x="100" y="100" width="1000" height="430" rx="8" fill="#0A0A0A" stroke="#EA2323" stroke-width="2"/>
+    
+    <!-- Window title bar -->
+    <rect x="100" y="100" width="1000" height="40" rx="8" fill="#1A1A1A"/>
+    <rect x="100" y="130" width="1000" height="10" fill="#0A0A0A"/>
+    
+    <!-- Window controls -->
+    <circle cx="125" cy="120" r="6" fill="#EA2323"/>
+    <circle cx="150" cy="120" r="6" fill="#FFA500"/>
+    <circle cx="175" cy="120" r="6" fill="#00FF00"/>
+    
+    <!-- Title -->
+    <text x="600" y="127" font-family="JetBrains Mono, monospace" font-size="14" fill="#EA2323" text-anchor="middle">
+      ZYNIQ STUDIO v2.0.0 — PRODUCTION READY
+    </text>
+  </g>
+  
+  <!-- Terminal content -->
+  <g font-family="JetBrains Mono, monospace" font-size="16">
+    <!-- Command prompts -->
+    <text x="130" y="180" fill="#00FF00">admin@zyniq:~$</text>
+    <text x="280" y="180" fill="#FFFFFF">./launch-studio.sh</text>
+    
+    <!-- Boot sequence -->
+    <text x="130" y="215" fill="#EA2323">[✓]</text>
+    <text x="170" y="215" fill="#CCCCCC">Initializing ZYNIQ.STUDIO...</text>
+    
+    <text x="130" y="245" fill="#EA2323">[✓]</text>
+    <text x="170" y="245" fill="#CCCCCC">Loading AI Agent Marketplace...</text>
+    
+    <text x="130" y="275" fill="#EA2323">[✓]</text>
+    <text x="170" y="275" fill="#CCCCCC">Connecting to GPU Clusters...</text>
+    
+    <text x="130" y="305" fill="#EA2323">[✓]</text>
+    <text x="170" y="305" fill="#CCCCCC">Apps Center: 10 microservices online</text>
+    
+    <!-- System status -->
+    <rect x="130" y="330" width="940" height="1" fill="#EA2323" opacity="0.3"/>
+    
+    <text x="130" y="370" fill="#00FF00" font-weight="700">SYSTEM STATUS:</text>
+    <text x="300" y="370" fill="#FFFFFF">OPERATIONAL</text>
+    
+    <!-- Feature list -->
+    <text x="130" y="405" fill="#999999">→ AI Agent Factory</text>
+    <text x="400" y="405" fill="#999999">→ Command Center</text>
+    <text x="670" y="405" fill="#999999">→ Model Forge</text>
+    
+    <text x="130" y="435" fill="#999999">→ Apps Center (10+ apps)</text>
+    <text x="400" y="435" fill="#999999">→ Design Engine</text>
+    <text x="670" y="435" fill="#999999">→ Beta Access</text>
+    
+    <!-- CTA prompt -->
+    <rect x="130" y="455" width="940" height="1" fill="#EA2323" opacity="0.3"/>
+    
+    <text x="130" y="490" fill="#00FF00">admin@zyniq:~$</text>
+    <text x="280" y="490" fill="#FFFFFF">request_</text>
+    <rect x="380" y="475" width="12" height="20" fill="#EA2323" opacity="0.8">
+      <animate attributeName="opacity" values="0;1;0" dur="1s" repeatCount="indefinite"/>
+    </rect>
+    <text x="400" y="490" fill="#666666">beta_access</text>
+  </g>
+  
+  <!-- Branding -->
+  <g transform="translate(850, 80)">
+    <text font-family="Orbitron, sans-serif" font-size="32" font-weight="900" fill="#FFFFFF" letter-spacing="2">
+      ZYNIQ
+    </text>
+    <text x="150" y="0" font-family="Orbitron, sans-serif" font-size="24" font-weight="700" fill="#EA2323" letter-spacing="1">
+      STUDIO
+    </text>
+  </g>
+  
+  <!-- Corner markers -->
+  <g opacity="0.5">
+    <path d="M 50 50 L 50 80 M 50 50 L 80 50" stroke="#EA2323" stroke-width="3" fill="none"/>
+    <path d="M 1150 50 L 1150 80 M 1150 50 L 1120 50" stroke="#EA2323" stroke-width="3" fill="none"/>
+    <path d="M 50 580 L 50 550 M 50 580 L 80 580" stroke="#EA2323" stroke-width="3" fill="none"/>
+    <path d="M 1150 580 L 1150 550 M 1150 580 L 1120 580" stroke="#EA2323" stroke-width="3" fill="none"/>
+  </g>
+  
+  <!-- Domain -->
+  <text x="1140" y="615" font-family="JetBrains Mono, monospace" font-size="14" fill="#EA2323" text-anchor="end">
+    zyniq.studio
+  </text>
+  
+  <!-- The Factory tagline -->
+  <text x="130" y="565" font-family="Space Grotesk, sans-serif" font-size="14" fill="#666666" letter-spacing="2">
+    THE FACTORY IS OPEN
+  </text>
+</svg>

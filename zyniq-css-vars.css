@@ -1,0 +1,19 @@
+/**
+ * @zyniq-studio
+ * @file zyniq-css-vars.css
+ * @description BACKWARD-COMPAT WRAPPER — Re-exports from Z-Framework v2.0.
+ *              This file is kept at the project root for zero-downtime migration.
+ *              All existing @import paths continue to work.
+ *
+ *  NEW consumers should import from:
+ *    core/_z-framework/z-tokens.css
+ *
+ *  This file imports z-tokens.css which already includes a
+ *  backward-compatibility section mapping ALL legacy variable names
+ *  (--zyniq-*, --surface-*, --glass-*, --severity-*, --risk-*,
+ *   --gray-*, --font-*) to new --z-* prefixed equivalents.
+ *
+ *  Usage (unchanged):  @import '../../zyniq-css-vars.css';
+ */
+
+@import url('./core/_z-framework/z-tokens.css');

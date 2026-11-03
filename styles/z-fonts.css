@@ -1,0 +1,51 @@
+/* ============================================================
+   ZYNIQ Fonts — z-fonts.css v2.0.0
+   Single canonical Google Fonts import for ALL frontends.
+   
+   Replaces 12+ scattered @import statements across the workspace.
+   Import this file ONCE per frontend entry point.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500&family=Material+Symbols+Rounded&display=swap');
+
+/* ── Local Fallback Declarations ─────────────────────────── */
+
+@font-face {
+  font-family: 'Orbitron';
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+  src: local('Orbitron');
+}
+
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: local('Space Grotesk');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: local('Inter');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: local('JetBrains Mono');
+}
+
+/* ── Utility Classes ─────────────────────────────────────── */
+
+.z-font-heading { font-family: var(--z-font-heading); }
+.z-font-display { font-family: var(--z-font-display); }
+.z-font-body    { font-family: var(--z-font-body); }
+.z-font-code    { font-family: var(--z-font-code); }
+.z-font-icon    { font-family: 'Material Symbols Rounded'; font-style: normal; }
