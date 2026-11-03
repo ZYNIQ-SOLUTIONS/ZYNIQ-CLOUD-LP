@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef, useState } from 'react'
-import { motion, useInView, AnimatePresence } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
 import {
   Shield,
   Globe,
@@ -10,7 +10,6 @@ import {
   Eye,
   Cpu,
   Database,
-  Cloud,
   ArrowRight,
   CheckCircle,
   Zap,
@@ -19,9 +18,7 @@ import {
   Layers,
   HardDrive,
   Network,
-  Users,
   Terminal,
-  BarChart3,
   Gauge,
 } from 'lucide-react'
 import CustomCursor from '@/components/CustomCursor'
@@ -32,6 +29,7 @@ import PreFooterSecurity from '@/components/PreFooterSecurity'
 import SovereignCloudConsole from '@/components/HeroVisuals/SovereignCloudConsole'
 import WaitlistForm from '@/components/WaitlistForm'
 import TiltCard from '@/components/TiltCard'
+import { CornerMarks } from '@/components/blueprint/CornerMarks'
 
 /* ================================================================== */
 const fadeUp = (delay = 0) => ({
@@ -55,16 +53,12 @@ function SectionWrap({ children, className = '', id }: { children: React.ReactNo
 /* ================================================================== */
 export default function CloudPage() {
   return (
-    <>
+    <div className="min-h-screen bg-paper text-ink font-sans antialiased bp-grid">
       <CustomCursor />
       <ScrollProgress />
       <CookieBanner />
 
-      <style jsx global>{`
-        body { background-color: #f8fafc !important; color: #0f172a !important; }
-      `}</style>
-
-      <main className="pt-20 bg-[#f8fafc]">
+      <main className="pt-20">
         <HeroSection />
         <TrustBar />
         <WhyZyniqCloud />
@@ -78,95 +72,94 @@ export default function CloudPage() {
 
       <PreFooterSecurity />
       <Footer />
-    </>
+    </div>
   )
 }
 
 /* ================================================================== */
-/*  HERO                                                               */
+/*  HERO SECTION — BLUEPRINT ARCHITECTURE                             */
 /* ================================================================== */
 function HeroSection() {
   return (
-    <section className="relative pt-24 pb-20 md:pt-32 md:pb-28 bg-white border-b border-slate-100 overflow-hidden">
-      {/* Precision architectural grid background */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#0f172a06_1px,transparent_1px),linear-gradient(to_bottom,#0f172a06_1px,transparent_1px)] bg-[size:3rem_3rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_80%,transparent_100%)] pointer-events-none" />
+    <section className="relative pt-12 pb-20 md:pt-16 md:pb-28 overflow-hidden">
+      <div className="relative z-10 container mx-auto px-5 sm:px-8 lg:px-10 max-w-7xl">
+        {/* Framed Blueprint Container with Corner Registration Marks */}
+        <div className="relative border border-rule bg-paper-raised/40 p-6 sm:p-10 lg:p-12">
+          <CornerMarks />
 
-      {/* Subtle top ambient radial fill */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 max-w-5xl h-96 bg-gradient-to-b from-slate-100/50 to-transparent blur-3xl pointer-events-none -z-0" />
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
+            {/* Left Column: Value Proposition & Action */}
+            <div className="lg:col-span-6 text-left">
+              <motion.div {...fadeUp(0.1)} className="mb-6 inline-flex">
+                <div className="inline-flex items-center gap-2.5 px-3 py-1.5 bg-paper border border-rule text-ink-muted text-xs font-jetbrains">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                  <span className="font-semibold text-ink">Sovereign Engine v4.2</span>
+                  <span className="text-ink-muted/40">/</span>
+                  <span className="text-red font-medium">Zero-Trust Guarded</span>
+                </div>
+              </motion.div>
 
-      <div className="relative z-10 container mx-auto px-6 max-w-7xl">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-          {/* Left Column: Value Proposition & Action */}
-          <div className="lg:col-span-6 text-left">
-            <motion.div {...fadeUp(0.1)} className="mb-6 inline-flex">
-              <div className="inline-flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-slate-900/[0.04] border border-slate-900/[0.08] text-slate-700 text-xs font-jetbrains">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                <span className="font-semibold text-slate-900">Sovereign Engine v4.2</span>
-                <span className="text-slate-300">/</span>
-                <span className="text-slate-600">Zero-Trust Guarded</span>
-              </div>
-            </motion.div>
-
-            <motion.h1
-              {...fadeUp(0.25)}
-              className="text-4xl sm:text-5xl lg:text-[3.5rem] font-orbitron font-black leading-[1.08] tracking-tight text-slate-900 mb-6"
-            >
-              Sovereign cloud compute.
-              <br />
-              <span className="text-slate-500 font-extrabold">
-                Zero dependencies.
-              </span>
-            </motion.h1>
-
-            <motion.p
-              {...fadeUp(0.4)}
-              className="text-base sm:text-lg text-slate-600 font-space leading-relaxed mb-8 max-w-xl"
-            >
-              Deploy self-healing Kubernetes clusters, dedicated vCPUs, and bare-metal NVMe storage protected by autonomous Dark Matter threat defense. Engineered for complete data sovereignty.
-            </motion.p>
-
-            <motion.div {...fadeUp(0.55)} className="flex flex-wrap items-center gap-3.5 mb-10">
-              <a
-                href="#deploy-cloud"
-                className="inline-flex items-center justify-center gap-2.5 bg-slate-900 hover:bg-black text-white px-7 py-3.5 rounded-lg font-space font-medium text-sm transition-all shadow-sm hover:shadow"
+              <motion.h1
+                {...fadeUp(0.25)}
+                className="text-4xl sm:text-5xl lg:text-[3.5rem] font-orbitron font-black leading-[1.08] tracking-tight text-ink mb-6"
               >
-                <span>Deploy Cluster</span>
-                <ArrowRight className="w-4 h-4 text-slate-400" />
-              </a>
-              <a
-                href="#services"
-                className="inline-flex items-center justify-center gap-2 border border-slate-300/80 hover:border-slate-400 text-slate-800 bg-white/80 hover:bg-slate-50 px-6 py-3.5 rounded-lg font-space font-medium text-sm transition-colors"
-              >
-                <span>Explore Architecture</span>
-              </a>
-            </motion.div>
+                Sovereign cloud compute.
+                <br />
+                <span className="text-red font-extrabold">
+                  Zero dependencies.
+                </span>
+              </motion.h1>
 
-            {/* Micro Trust & SLA Strip */}
-            <motion.div {...fadeUp(0.7)} className="grid grid-cols-3 gap-6 pt-7 border-t border-slate-200/80 max-w-lg">
-              <div>
-                <div className="font-jetbrains text-xl font-bold text-slate-900 tabular-nums">99.999%</div>
-                <div className="text-xs font-space text-slate-500 mt-0.5">Uptime SLA</div>
-              </div>
-              <div>
-                <div className="font-jetbrains text-xl font-bold text-slate-900 tabular-nums">&lt;5ms</div>
-                <div className="text-xs font-space text-slate-500 mt-0.5">Edge Latency</div>
-              </div>
-              <div>
-                <div className="font-jetbrains text-xl font-bold text-slate-900 tabular-nums">12+</div>
-                <div className="text-xs font-space text-slate-500 mt-0.5">Sovereign Zones</div>
-              </div>
+              <motion.p
+                {...fadeUp(0.4)}
+                className="text-base sm:text-lg text-ink-muted font-space leading-relaxed mb-8 max-w-xl"
+              >
+                Deploy self-healing Kubernetes clusters, dedicated vCPUs, and bare-metal NVMe storage protected by autonomous Dark Matter threat defense. Engineered for complete data sovereignty.
+              </motion.p>
+
+              <motion.div {...fadeUp(0.55)} className="flex flex-wrap items-center gap-3.5 mb-10">
+                <a
+                  href="#deploy-cloud"
+                  className="inline-flex items-center justify-center gap-2.5 bg-red hover:bg-[#b01818] text-white px-7 py-3.5 font-space font-medium text-sm bp-btn shadow-lg shadow-red/20"
+                >
+                  <span>Deploy Cluster</span>
+                  <ArrowRight className="w-4 h-4" />
+                </a>
+                <a
+                  href="#services"
+                  className="inline-flex items-center justify-center gap-2 border border-rule hover:border-ink text-ink bg-paper-raised hover:bg-paper px-6 py-3.5 font-space font-medium text-sm bp-btn"
+                >
+                  <span>Explore Architecture</span>
+                </a>
+              </motion.div>
+
+              {/* Micro Trust & SLA Strip */}
+              <motion.div {...fadeUp(0.7)} className="grid grid-cols-3 gap-6 pt-7 border-t border-rule max-w-lg">
+                <div>
+                  <div className="font-jetbrains text-xl font-bold text-ink tabular-nums">99.999%</div>
+                  <div className="bp-label mt-0.5">Uptime SLA</div>
+                </div>
+                <div>
+                  <div className="font-jetbrains text-xl font-bold text-ink tabular-nums">&lt;5ms</div>
+                  <div className="bp-label mt-0.5">Edge Latency</div>
+                </div>
+                <div>
+                  <div className="font-jetbrains text-xl font-bold text-ink tabular-nums">12+</div>
+                  <div className="bp-label mt-0.5">Sovereign Zones</div>
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Right Column: Sovereign Cloud Console Moment */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.96, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              className="lg:col-span-6 w-full"
+            >
+              <SovereignCloudConsole />
             </motion.div>
           </div>
-
-          {/* Right Column: Sovereign Cloud Console Moment */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.96, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            className="lg:col-span-6 w-full"
-          >
-            <SovereignCloudConsole />
-          </motion.div>
         </div>
       </div>
     </section>
@@ -185,8 +178,8 @@ function TrustBar() {
   ]
 
   return (
-    <SectionWrap className="bg-slate-900 text-white">
-      <div className="container mx-auto px-6 py-12">
+    <SectionWrap className="bg-paper-raised/80 border-y border-rule text-ink">
+      <div className="container mx-auto px-6 py-10 max-w-7xl">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {stats.map((s, i) => (
             <motion.div
@@ -197,8 +190,8 @@ function TrustBar() {
               transition={{ delay: i * 0.1, duration: 0.6 }}
               className="text-center"
             >
-              <div className="text-3xl md:text-4xl font-orbitron font-bold text-zyniq-red">{s.value}</div>
-              <div className="text-[10px] font-jetbrains text-white/40 mt-1 tracking-wider">{s.label}</div>
+              <div className="text-3xl md:text-4xl font-orbitron font-bold text-red">{s.value}</div>
+              <div className="text-[11px] font-jetbrains text-ink-muted mt-1.5 tracking-wider uppercase">{s.label}</div>
             </motion.div>
           ))}
         </div>
@@ -235,16 +228,16 @@ function WhyZyniqCloud() {
   ]
 
   return (
-    <SectionWrap className="py-28 bg-[#f8fafc]">
+    <SectionWrap className="py-24 sm:py-28">
       <div className="container mx-auto px-6 max-w-6xl">
         <motion.div {...fadeUp(0)} className="text-center mb-16">
-          <span className="text-xs font-jetbrains text-zyniq-red uppercase tracking-[0.3em] mb-3 block">
+          <span className="bp-label text-red uppercase tracking-[0.25em] mb-3 block">
             Why ZYNIQ Cloud
           </span>
-          <h2 className="text-4xl md:text-5xl font-orbitron font-black text-slate-900 mb-4">
-            CLOUD <span className="text-zyniq-red">REIMAGINED</span>
+          <h2 className="text-4xl md:text-5xl font-orbitron font-black text-ink mb-4">
+            CLOUD <span className="text-red">REIMAGINED</span>
           </h2>
-          <p className="text-lg text-slate-500 font-space max-w-2xl mx-auto">
+          <p className="text-lg text-ink-muted font-space max-w-2xl mx-auto">
             Not just hosting. A complete infrastructure ecosystem protected by artificial intelligence.
           </p>
         </motion.div>
@@ -259,14 +252,15 @@ function WhyZyniqCloud() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, duration: 0.7 }}
-                className="flex gap-5 p-7 bg-white border border-slate-100 hover:border-zyniq-red/15 rounded-lg transition-all hover:shadow-lg hover:shadow-red-500/[0.03]"
+                className="relative flex gap-5 p-7 bg-paper-raised border border-rule hover:border-red/40 transition-all bp-btn"
               >
-                <div className="w-12 h-12 bg-zyniq-red/[0.06] border border-zyniq-red/10 flex items-center justify-center rounded-lg flex-shrink-0">
-                  <Icon className="w-5 h-5 text-zyniq-red" />
+                <CornerMarks />
+                <div className="w-12 h-12 bg-red/10 border border-red/30 flex items-center justify-center flex-shrink-0">
+                  <Icon className="w-5 h-5 text-red" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-orbitron font-bold text-slate-900 mb-2">{point.title}</h3>
-                  <p className="text-sm text-slate-500 font-space leading-relaxed">{point.description}</p>
+                  <h3 className="text-lg font-orbitron font-bold text-ink mb-2">{point.title}</h3>
+                  <p className="text-sm text-ink-muted font-space leading-relaxed">{point.description}</p>
                 </div>
               </motion.div>
             )
@@ -293,16 +287,16 @@ function ServicesGrid() {
   ]
 
   return (
-    <SectionWrap id="services" className="py-28 bg-white">
+    <SectionWrap id="services" className="py-24 sm:py-28 border-t border-rule bg-paper/60">
       <div className="container mx-auto px-6 max-w-7xl">
         <motion.div {...fadeUp(0)} className="text-center mb-16">
-          <span className="text-xs font-jetbrains text-zyniq-red uppercase tracking-[0.3em] mb-3 block">
+          <span className="bp-label text-red uppercase tracking-[0.25em] mb-3 block">
             Services
           </span>
-          <h2 className="text-4xl md:text-5xl font-orbitron font-black text-slate-900 mb-4">
-            EVERYTHING YOU <span className="text-zyniq-red">NEED</span>
+          <h2 className="text-4xl md:text-5xl font-orbitron font-black text-ink mb-4">
+            EVERYTHING YOU <span className="text-red">NEED</span>
           </h2>
-          <p className="text-lg text-slate-500 font-space max-w-2xl mx-auto">
+          <p className="text-lg text-ink-muted font-space max-w-2xl mx-auto">
             A complete cloud platform. Not just servers — an intelligent infrastructure ecosystem.
           </p>
         </motion.div>
@@ -319,10 +313,11 @@ function ServicesGrid() {
                 transition={{ delay: i * 0.05, duration: 0.6 }}
               >
                 <TiltCard className="h-full">
-                  <div className="h-full p-6 bg-slate-50/50 border border-slate-100 hover:border-zyniq-red/15 rounded-lg transition-all group hover:shadow-lg hover:shadow-red-500/[0.02]">
-                    <Icon className="w-5 h-5 text-zyniq-red mb-4" />
-                    <h3 className="text-base font-orbitron font-bold text-slate-900 mb-2">{service.title}</h3>
-                    <p className="text-xs text-slate-500 font-space leading-relaxed">{service.desc}</p>
+                  <div className="relative h-full p-6 bg-paper-raised border border-rule hover:border-red/40 transition-all group">
+                    <CornerMarks />
+                    <Icon className="w-5 h-5 text-red mb-4" />
+                    <h3 className="text-base font-orbitron font-bold text-ink mb-2">{service.title}</h3>
+                    <p className="text-xs text-ink-muted font-space leading-relaxed">{service.desc}</p>
                   </div>
                 </TiltCard>
               </motion.div>
@@ -348,20 +343,21 @@ function DarkMatterSection() {
   ]
 
   return (
-    <SectionWrap className="py-28 bg-slate-900 text-white">
+    <SectionWrap className="py-24 sm:py-28 bg-[#0a0c0e] border-y border-rule text-ink">
       <div className="container mx-auto px-6 max-w-6xl">
         <motion.div {...fadeUp(0)} className="text-center mb-16">
           <div className="mb-6 flex justify-center">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="https://media-bucket-cdn.zyniq.solutions/brand-assets/ZYNIQ_DARKMATTER_LOGO.png"
               alt="DARK MATTER"
               className="h-12 w-auto object-contain"
             />
           </div>
-          <h2 className="text-4xl md:text-5xl font-orbitron font-black mb-4">
-            DARK MATTER <span className="text-zyniq-red">SECURITY</span>
+          <h2 className="text-4xl md:text-5xl font-orbitron font-black text-ink mb-4">
+            DARK MATTER <span className="text-red">SECURITY</span>
           </h2>
-          <p className="text-lg text-white/50 font-space max-w-2xl mx-auto">
+          <p className="text-lg text-ink-muted font-space max-w-2xl mx-auto">
             The security atmosphere that surrounds every ZYNIQ Cloud deployment.
             AI-powered. Autonomous. Relentless.
           </p>
@@ -377,11 +373,12 @@ function DarkMatterSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.06, duration: 0.6 }}
-                className="p-6 bg-white/[0.03] border border-white/[0.06] hover:border-zyniq-red/20 rounded-lg transition-all"
+                className="relative p-6 bg-paper-raised border border-rule hover:border-red/40 transition-all"
               >
-                <Icon className="w-5 h-5 text-zyniq-red mb-4" />
-                <h3 className="text-base font-orbitron font-bold text-white mb-2">{f.title}</h3>
-                <p className="text-xs text-white/40 font-space leading-relaxed">{f.desc}</p>
+                <CornerMarks />
+                <Icon className="w-5 h-5 text-red mb-4" />
+                <h3 className="text-base font-orbitron font-bold text-ink mb-2">{f.title}</h3>
+                <p className="text-xs text-ink-muted font-space leading-relaxed">{f.desc}</p>
               </motion.div>
             )
           })}
@@ -432,17 +429,17 @@ function ForEveryone() {
   ]
 
   return (
-    <SectionWrap className="py-28 bg-[#f8fafc]">
+    <SectionWrap className="py-24 sm:py-28">
       <div className="container mx-auto px-6 max-w-6xl">
         <motion.div {...fadeUp(0)} className="text-center mb-16">
-          <span className="text-xs font-jetbrains text-zyniq-red uppercase tracking-[0.3em] mb-3 block">
+          <span className="bp-label text-red uppercase tracking-[0.25em] mb-3 block">
             For Everyone
           </span>
-          <h2 className="text-4xl md:text-5xl font-orbitron font-black text-slate-900 mb-4">
-            YOUR LEVEL. <span className="text-zyniq-red">YOUR CLOUD.</span>
+          <h2 className="text-4xl md:text-5xl font-orbitron font-black text-ink mb-4">
+            YOUR LEVEL. <span className="text-red">YOUR CLOUD.</span>
           </h2>
-          <p className="text-lg text-slate-500 font-space max-w-2xl mx-auto">
-            Whether you type <code className="text-zyniq-red bg-zyniq-red/[0.06] px-2 py-0.5 rounded text-sm font-jetbrains">kubectl</code> in
+          <p className="text-lg text-ink-muted font-space max-w-2xl mx-auto">
+            Whether you type <code className="text-red bg-red/10 border border-red/20 px-2 py-0.5 text-sm font-jetbrains">kubectl</code> in
             your sleep or you just learned what a server is — ZYNIQ Cloud adapts to you.
           </p>
         </motion.div>
@@ -455,15 +452,16 @@ function ForEveryone() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.7 }}
-              className="bg-white border border-slate-100 hover:border-zyniq-red/15 rounded-lg p-7 transition-all hover:shadow-lg hover:shadow-red-500/[0.03]"
+              className="relative bg-paper-raised border border-rule hover:border-red/40 p-7 transition-all"
             >
-              <h3 className="text-xl font-orbitron font-bold text-slate-900 mb-1">{persona.title}</h3>
-              <p className="text-xs font-jetbrains text-zyniq-red/60 uppercase tracking-wider mb-5">{persona.subtitle}</p>
+              <CornerMarks />
+              <h3 className="text-xl font-orbitron font-bold text-ink mb-1">{persona.title}</h3>
+              <p className="text-xs font-jetbrains text-red/80 uppercase tracking-wider mb-5">{persona.subtitle}</p>
               <div className="space-y-3">
                 {persona.features.map((f) => (
                   <div key={f} className="flex items-start gap-2.5">
-                    <CheckCircle className="w-4 h-4 text-zyniq-red flex-shrink-0 mt-0.5" />
-                    <span className="text-sm text-slate-600 font-space">{f}</span>
+                    <CheckCircle className="w-4 h-4 text-red flex-shrink-0 mt-0.5" />
+                    <span className="text-sm text-ink-muted font-space">{f}</span>
                   </div>
                 ))}
               </div>
@@ -476,7 +474,7 @@ function ForEveryone() {
 }
 
 /* ================================================================== */
-/*  PRICING                                                            */
+/*  PRICING TIERS                                                      */
 /* ================================================================== */
 function PricingTiers() {
   const [annual, setAnnual] = useState(false)
@@ -512,30 +510,30 @@ function PricingTiers() {
   ]
 
   return (
-    <SectionWrap id="pricing" className="py-28 bg-white">
+    <SectionWrap id="pricing" className="py-24 sm:py-28 border-t border-rule bg-paper/40">
       <div className="container mx-auto px-6 max-w-5xl">
         <motion.div {...fadeUp(0)} className="text-center mb-12">
-          <span className="text-xs font-jetbrains text-zyniq-red uppercase tracking-[0.3em] mb-3 block">
+          <span className="bp-label text-red uppercase tracking-[0.25em] mb-3 block">
             Pricing
           </span>
-          <h2 className="text-4xl md:text-5xl font-orbitron font-black text-slate-900 mb-4">
-            TRANSPARENT <span className="text-zyniq-red">PRICING</span>
+          <h2 className="text-4xl md:text-5xl font-orbitron font-black text-ink mb-4">
+            TRANSPARENT <span className="text-red">PRICING</span>
           </h2>
-          <p className="text-lg text-slate-500 font-space max-w-2xl mx-auto mb-8">
+          <p className="text-lg text-ink-muted font-space max-w-2xl mx-auto mb-8">
             No hidden fees. No surprise bills. What you see is what you pay.
           </p>
 
           {/* Toggle */}
           <div className="flex items-center justify-center gap-3">
-            <span className={`text-sm font-space ${!annual ? 'text-slate-900 font-semibold' : 'text-slate-400'}`}>Monthly</span>
+            <span className={`text-sm font-space ${!annual ? 'text-ink font-semibold' : 'text-ink-muted'}`}>Monthly</span>
             <button
               onClick={() => setAnnual(!annual)}
-              className={`relative w-12 h-6 rounded-full transition-colors ${annual ? 'bg-zyniq-red' : 'bg-slate-300'}`}
+              className={`relative w-12 h-6 rounded-full transition-colors ${annual ? 'bg-red' : 'bg-paper-raised border border-rule'}`}
             >
               <div className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-transform ${annual ? 'left-7' : 'left-1'}`} />
             </button>
-            <span className={`text-sm font-space ${annual ? 'text-slate-900 font-semibold' : 'text-slate-400'}`}>
-              Annual <span className="text-zyniq-red text-xs font-jetbrains">SAVE 20%</span>
+            <span className={`text-sm font-space ${annual ? 'text-ink font-semibold' : 'text-ink-muted'}`}>
+              Annual <span className="text-red text-xs font-jetbrains">SAVE 20%</span>
             </span>
           </div>
         </motion.div>
@@ -548,37 +546,38 @@ function PricingTiers() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.7 }}
-              className={`relative p-7 rounded-lg border transition-all ${
+              className={`relative p-7 border transition-all ${
                 plan.popular
-                  ? 'border-zyniq-red bg-zyniq-red/[0.02] shadow-xl shadow-red-500/[0.05]'
-                  : 'border-slate-100 bg-white hover:border-zyniq-red/15'
+                  ? 'border-red bg-paper-raised shadow-xl shadow-red/10'
+                  : 'border-rule bg-paper-raised/70 hover:border-red/40'
               }`}
             >
+              <CornerMarks />
               {plan.popular && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-zyniq-red text-white text-[10px] font-orbitron font-bold px-4 py-1 tracking-widest uppercase">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-red text-white text-[10px] font-orbitron font-bold px-4 py-1 tracking-widest uppercase shadow">
                   MOST POPULAR
                 </div>
               )}
-              <h3 className="text-lg font-orbitron font-bold text-slate-900 mb-1">{plan.name}</h3>
-              <p className="text-xs text-slate-400 font-space mb-4">{plan.description}</p>
+              <h3 className="text-lg font-orbitron font-bold text-ink mb-1">{plan.name}</h3>
+              <p className="text-xs text-ink-muted font-space mb-4">{plan.description}</p>
               <div className="mb-6">
-                <span className="text-4xl font-orbitron font-black text-slate-900">{plan.price}</span>
-                <span className="text-sm text-slate-400 font-space">{plan.period}</span>
+                <span className="text-4xl font-orbitron font-black text-ink">{plan.price}</span>
+                <span className="text-sm text-ink-muted font-space">{plan.period}</span>
               </div>
               <div className="space-y-2.5 mb-8">
                 {plan.features.map((f) => (
                   <div key={f} className="flex items-center gap-2.5">
-                    <CheckCircle className="w-3.5 h-3.5 text-zyniq-red flex-shrink-0" />
-                    <span className="text-sm text-slate-600 font-space">{f}</span>
+                    <CheckCircle className="w-3.5 h-3.5 text-red flex-shrink-0" />
+                    <span className="text-sm text-ink-muted font-space">{f}</span>
                   </div>
                 ))}
               </div>
               <a
                 href="#deploy-cloud"
-                className={`block text-center py-3 font-orbitron font-bold text-sm tracking-wider uppercase transition-all rounded-lg ${
+                className={`block text-center py-3 font-orbitron font-bold text-sm tracking-wider uppercase transition-all bp-btn ${
                   plan.popular
-                    ? 'bg-zyniq-red hover:bg-red-700 text-white'
-                    : 'border border-slate-200 hover:border-zyniq-red text-slate-700 hover:text-zyniq-red'
+                    ? 'bg-red hover:bg-[#b01818] text-white shadow-md shadow-red/20'
+                    : 'border border-rule hover:border-red text-ink hover:text-red bg-paper'
                 }`}
               >
                 {plan.cta}
@@ -600,14 +599,14 @@ function ComplianceSection() {
   ]
 
   return (
-    <SectionWrap className="py-20 bg-[#f8fafc]">
+    <SectionWrap className="py-20 border-t border-rule bg-paper">
       <div className="container mx-auto px-6 max-w-4xl text-center">
         <motion.div {...fadeUp(0)}>
-          <span className="text-xs font-jetbrains text-zyniq-red uppercase tracking-[0.3em] mb-3 block">
+          <span className="bp-label text-red uppercase tracking-[0.25em] mb-3 block">
             Compliance
           </span>
-          <h2 className="text-3xl md:text-4xl font-orbitron font-black text-slate-900 mb-8">
-            ENTERPRISE <span className="text-zyniq-red">READY</span>
+          <h2 className="text-3xl md:text-4xl font-orbitron font-black text-ink mb-8">
+            ENTERPRISE <span className="text-red">READY</span>
           </h2>
         </motion.div>
         <div className="flex flex-wrap justify-center gap-4">
@@ -618,7 +617,7 @@ function ComplianceSection() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.05, duration: 0.4 }}
-              className="px-6 py-3 bg-white border border-slate-100 rounded-md text-sm font-orbitron font-bold text-slate-700 hover:border-zyniq-red/20 hover:text-zyniq-red transition-all"
+              className="px-6 py-3 bg-paper-raised border border-rule text-sm font-orbitron font-bold text-ink-muted hover:text-ink hover:border-red transition-all"
             >
               {badge}
             </motion.div>
@@ -634,23 +633,26 @@ function ComplianceSection() {
 /* ================================================================== */
 function DeployCloud() {
   return (
-    <SectionWrap id="deploy-cloud" className="py-28 bg-white relative">
+    <SectionWrap id="deploy-cloud" className="py-24 sm:py-28 border-t border-rule bg-paper-raised/40 relative">
       <div id="waitlist" className="absolute -top-24 pointer-events-none" />
       <div className="container mx-auto px-6 max-w-3xl text-center">
-        <motion.div {...fadeUp(0)} className="mb-12">
-          <span className="text-xs font-jetbrains text-zyniq-red uppercase tracking-[0.3em] mb-3 block">
-            Get Started
-          </span>
-          <h2 className="text-4xl md:text-5xl font-orbitron font-black text-slate-900 mb-4">
-            LAUNCH YOUR <span className="text-zyniq-red">CLOUD</span>
-          </h2>
-          <p className="text-lg text-slate-500 font-space max-w-2xl mx-auto">
-            Join the waitlist for early access to ZYNIQ Cloud. Be among the first
-            to experience sovereign hosting with Dark Matter security.
-          </p>
-        </motion.div>
+        <div className="relative border border-rule bg-paper p-8 sm:p-12">
+          <CornerMarks />
+          <motion.div {...fadeUp(0)} className="mb-12">
+            <span className="bp-label text-red uppercase tracking-[0.25em] mb-3 block">
+              Get Started
+            </span>
+            <h2 className="text-4xl md:text-5xl font-orbitron font-black text-ink mb-4">
+              LAUNCH YOUR <span className="text-red">CLOUD</span>
+            </h2>
+            <p className="text-lg text-ink-muted font-space max-w-2xl mx-auto">
+              Join the waitlist for early access to ZYNIQ Cloud. Be among the first
+              to experience sovereign hosting with Dark Matter security.
+            </p>
+          </motion.div>
 
-        <WaitlistForm source="cloud" label="JOIN WAITLIST" />
+          <WaitlistForm source="cloud" label="JOIN WAITLIST" />
+        </div>
       </div>
     </SectionWrap>
   )

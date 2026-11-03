@@ -13,6 +13,15 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        paper: 'var(--paper)',
+        'paper-raised': 'var(--paper-raised)',
+        ink: 'var(--ink)',
+        'ink-muted': 'var(--ink-muted)',
+        rule: 'var(--rule)',
+        grid: 'var(--grid)',
+        red: 'var(--red)',
+      },
       // Landing pages specific: Space Grotesk alias + jetbrains alias
       fontFamily: {
         space: ['Space Grotesk', 'sans-serif'],

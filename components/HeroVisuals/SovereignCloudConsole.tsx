@@ -14,6 +14,7 @@ import {
   Terminal,
   Zap,
 } from 'lucide-react'
+import { CornerMarks } from '../blueprint/CornerMarks'
 
 export default function SovereignCloudConsole() {
   const [activeTab, setActiveTab] = useState<'topology' | 'compute' | 'security'>('topology')
@@ -29,30 +30,32 @@ export default function SovereignCloudConsole() {
 
   return (
     <div className="relative w-full max-w-xl mx-auto lg:max-w-none">
-      {/* Outer Glow Backdrop (very subtle slate) */}
-      <div className="absolute -inset-1.5 bg-gradient-to-b from-slate-200/60 to-slate-100/20 rounded-2xl blur-lg pointer-events-none -z-10" />
+      {/* Outer Glow Backdrop */}
+      <div className="absolute -inset-1.5 bg-gradient-to-b from-red/10 via-transparent to-transparent rounded-lg blur-lg pointer-events-none -z-10" />
 
-      {/* Main Console Window */}
-      <div className="bg-slate-950 text-slate-100 rounded-2xl border border-slate-800 shadow-2xl shadow-slate-900/20 overflow-hidden">
+      {/* Main Console Window with Registration Marks */}
+      <div className="relative bg-paper-raised text-ink border border-rule shadow-2xl shadow-black/60 overflow-hidden">
+        <CornerMarks />
+
         {/* Console Header Bar */}
-        <div className="flex items-center justify-between px-4 py-3 bg-slate-900/80 border-b border-slate-800/80 backdrop-blur-sm">
+        <div className="flex items-center justify-between px-4 py-3 bg-[#131619] border-b border-rule backdrop-blur-sm">
           <div className="flex items-center gap-2">
             <div className="flex gap-1.5">
-              <span className="w-2.5 h-2.5 rounded-full bg-slate-700/80 inline-block" />
-              <span className="w-2.5 h-2.5 rounded-full bg-slate-700/80 inline-block" />
-              <span className="w-2.5 h-2.5 rounded-full bg-slate-700/80 inline-block" />
+              <span className="w-2.5 h-2.5 rounded-full bg-red/80 inline-block" />
+              <span className="w-2.5 h-2.5 rounded-full bg-ink/20 inline-block" />
+              <span className="w-2.5 h-2.5 rounded-full bg-ink/10 inline-block" />
             </div>
-            <div className="h-3 w-px bg-slate-800 mx-1" />
-            <div className="flex items-center gap-1.5 font-jetbrains text-[11px] text-slate-400">
-              <Terminal className="w-3.5 h-3.5 text-slate-400" />
+            <div className="h-3 w-px bg-rule mx-1" />
+            <div className="flex items-center gap-1.5 font-jetbrains text-[11px] text-ink-muted">
+              <Terminal className="w-3.5 h-3.5 text-red" />
               <span>zyniq-cloud-ctl</span>
-              <span className="text-slate-600">/</span>
-              <span className="text-slate-300">{currentRegionData.id}</span>
+              <span className="text-ink-muted/40">/</span>
+              <span className="text-ink">{currentRegionData.id}</span>
             </div>
           </div>
 
           {/* Live Ping Beacon */}
-          <div className="flex items-center gap-2 bg-emerald-950/60 border border-emerald-800/50 px-2.5 py-1 rounded-md">
+          <div className="flex items-center gap-2 bg-paper border border-rule px-2.5 py-1">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
@@ -64,44 +67,44 @@ export default function SovereignCloudConsole() {
         </div>
 
         {/* Tab Navigation */}
-        <div className="flex items-center gap-1 px-4 pt-3 bg-slate-950 border-b border-slate-900">
+        <div className="flex items-center gap-1 px-4 pt-2.5 bg-paper-raised border-b border-rule">
           <button
             onClick={() => setActiveTab('topology')}
-            className={`flex items-center gap-2 px-3 py-2 text-xs font-medium rounded-t-lg transition-colors ${
+            className={`flex items-center gap-2 px-3 py-2 text-xs font-mono transition-colors border-b-2 ${
               activeTab === 'topology'
-                ? 'bg-slate-900 text-white border-t border-x border-slate-800'
-                : 'text-slate-400 hover:text-slate-200'
+                ? 'text-ink border-red bg-paper/60 font-semibold'
+                : 'text-ink-muted hover:text-ink border-transparent'
             }`}
           >
-            <Globe className="w-3.5 h-3.5 text-slate-400" />
-            <span>Topology & Latency</span>
+            <Globe className="w-3.5 h-3.5" />
+            <span>Topology &amp; Latency</span>
           </button>
           <button
             onClick={() => setActiveTab('compute')}
-            className={`flex items-center gap-2 px-3 py-2 text-xs font-medium rounded-t-lg transition-colors ${
+            className={`flex items-center gap-2 px-3 py-2 text-xs font-mono transition-colors border-b-2 ${
               activeTab === 'compute'
-                ? 'bg-slate-900 text-white border-t border-x border-slate-800'
-                : 'text-slate-400 hover:text-slate-200'
+                ? 'text-ink border-red bg-paper/60 font-semibold'
+                : 'text-ink-muted hover:text-ink border-transparent'
             }`}
           >
-            <Cpu className="w-3.5 h-3.5 text-slate-400" />
+            <Cpu className="w-3.5 h-3.5" />
             <span>Bare-Metal Compute</span>
           </button>
           <button
             onClick={() => setActiveTab('security')}
-            className={`flex items-center gap-2 px-3 py-2 text-xs font-medium rounded-t-lg transition-colors ${
+            className={`flex items-center gap-2 px-3 py-2 text-xs font-mono transition-colors border-b-2 ${
               activeTab === 'security'
-                ? 'bg-slate-900 text-white border-t border-x border-slate-800'
-                : 'text-slate-400 hover:text-slate-200'
+                ? 'text-ink border-red bg-paper/60 font-semibold'
+                : 'text-ink-muted hover:text-ink border-transparent'
             }`}
           >
-            <Shield className="w-3.5 h-3.5 text-zyniq-red" />
+            <Shield className="w-3.5 h-3.5 text-red" />
             <span>Dark Matter Shield</span>
           </button>
         </div>
 
         {/* Console Body Area */}
-        <div className="p-5 bg-slate-950">
+        <div className="p-5 bg-paper">
           <AnimatePresence mode="wait">
             {activeTab === 'topology' && (
               <motion.div
@@ -114,7 +117,7 @@ export default function SovereignCloudConsole() {
               >
                 {/* Region Selector Cards */}
                 <div className="space-y-2">
-                  <div className="text-[11px] font-jetbrains text-slate-500 uppercase tracking-wider flex items-center justify-between">
+                  <div className="text-[11px] font-jetbrains text-ink-muted uppercase tracking-wider flex items-center justify-between">
                     <span>Active Sovereign Zones</span>
                     <span>Direct WireGuard Mesh</span>
                   </div>
@@ -123,27 +126,27 @@ export default function SovereignCloudConsole() {
                     <button
                       key={reg.id}
                       onClick={() => setActiveRegion(reg.id)}
-                      className={`w-full text-left p-3 rounded-lg border transition-all flex items-center justify-between ${
+                      className={`w-full text-left p-3 border transition-all flex items-center justify-between ${
                         activeRegion === reg.id
-                          ? 'bg-slate-900/90 border-slate-700 shadow-sm'
-                          : 'bg-slate-900/30 border-slate-800/60 hover:border-slate-700/80 hover:bg-slate-900/50'
+                          ? 'bg-paper-raised border-red/40 shadow-sm'
+                          : 'bg-paper-raised/40 border-rule hover:border-rule hover:bg-paper-raised/70'
                       }`}
                     >
                       <div className="flex items-center gap-3">
                         <div
                           className={`w-2 h-2 rounded-full ${
-                            activeRegion === reg.id ? 'bg-emerald-400 ring-2 ring-emerald-950' : 'bg-slate-600'
+                            activeRegion === reg.id ? 'bg-emerald-400 ring-2 ring-emerald-950' : 'bg-ink-muted/40'
                           }`}
                         />
                         <div>
-                          <div className="text-xs font-medium text-slate-200 flex items-center gap-2">
+                          <div className="text-xs font-medium text-ink flex items-center gap-2">
                             <span>{reg.name}</span>
-                            <span className="font-jetbrains text-[10px] text-slate-500 font-normal">
+                            <span className="font-jetbrains text-[10px] text-ink-muted font-normal">
                               [{reg.ip}]
                             </span>
                           </div>
-                          <div className="text-[11px] text-slate-400 font-normal mt-0.5">
-                            {reg.status} · Core Load: <span className="text-slate-300 font-jetbrains">{reg.load}</span>
+                          <div className="text-[11px] text-ink-muted font-normal mt-0.5">
+                            {reg.status} · Core Load: <span className="text-ink font-jetbrains">{reg.load}</span>
                           </div>
                         </div>
                       </div>
@@ -152,19 +155,19 @@ export default function SovereignCloudConsole() {
                         <span className="font-jetbrains text-xs font-semibold text-emerald-400 tabular-nums">
                           {reg.latency}
                         </span>
-                        <div className="text-[10px] font-jetbrains text-slate-500">RTT ping</div>
+                        <div className="text-[10px] font-jetbrains text-ink-muted">RTT ping</div>
                       </div>
                     </button>
                   ))}
                 </div>
 
                 {/* Micro Telemetry Bar */}
-                <div className="p-3 bg-slate-900/60 rounded-lg border border-slate-800/80 flex items-center justify-between text-xs">
+                <div className="p-3 bg-paper-raised border border-rule flex items-center justify-between text-xs">
                   <div className="flex items-center gap-2">
                     <Activity className="w-3.5 h-3.5 text-emerald-400" />
-                    <span className="text-slate-300 font-medium">BGP Route Optimisation</span>
+                    <span className="text-ink font-medium">BGP Route Optimisation</span>
                   </div>
-                  <span className="font-jetbrains text-[11px] text-slate-400">
+                  <span className="font-jetbrains text-[11px] text-ink-muted">
                     Sovereign Tunnel: <span className="text-emerald-400 font-semibold">100% Lossless</span>
                   </span>
                 </div>
@@ -182,46 +185,46 @@ export default function SovereignCloudConsole() {
               >
                 {/* Compute Metrics Grid */}
                 <div className="grid grid-cols-2 gap-3">
-                  <div className="p-3.5 rounded-lg bg-slate-900/60 border border-slate-800">
-                    <div className="flex items-center justify-between text-xs text-slate-400 mb-2">
-                      <span className="flex items-center gap-1.5 font-medium">
-                        <Cpu className="w-3.5 h-3.5 text-slate-400" />
+                  <div className="p-3.5 bg-paper-raised border border-rule">
+                    <div className="flex items-center justify-between text-xs text-ink-muted mb-2">
+                      <span className="flex items-center gap-1.5 font-medium text-ink">
+                        <Cpu className="w-3.5 h-3.5 text-red" />
                         Dedicated vCPU
                       </span>
                       <span className="font-jetbrains text-[11px] text-emerald-400 tabular-nums">34.2%</span>
                     </div>
-                    <div className="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+                    <div className="w-full bg-paper h-1.5 overflow-hidden border border-rule">
                       <div className="bg-emerald-500 h-full w-[34%]" />
                     </div>
-                    <div className="text-[10px] font-jetbrains text-slate-500 mt-2">
+                    <div className="text-[10px] font-jetbrains text-ink-muted mt-2">
                       96-Core AMD EPYC 9654
                     </div>
                   </div>
 
-                  <div className="p-3.5 rounded-lg bg-slate-900/60 border border-slate-800">
-                    <div className="flex items-center justify-between text-xs text-slate-400 mb-2">
-                      <span className="flex items-center gap-1.5 font-medium">
-                        <HardDrive className="w-3.5 h-3.5 text-slate-400" />
+                  <div className="p-3.5 bg-paper-raised border border-rule">
+                    <div className="flex items-center justify-between text-xs text-ink-muted mb-2">
+                      <span className="flex items-center gap-1.5 font-medium text-ink">
+                        <HardDrive className="w-3.5 h-3.5 text-red" />
                         NVMe Gen5 I/O
                       </span>
-                      <span className="font-jetbrains text-[11px] text-slate-300 tabular-nums">2.4M IOPS</span>
+                      <span className="font-jetbrains text-[11px] text-ink tabular-nums">2.4M IOPS</span>
                     </div>
-                    <div className="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
-                      <div className="bg-cyan-400 h-full w-[68%]" />
+                    <div className="w-full bg-paper h-1.5 overflow-hidden border border-rule">
+                      <div className="bg-red h-full w-[68%]" />
                     </div>
-                    <div className="text-[10px] font-jetbrains text-slate-500 mt-2">
+                    <div className="text-[10px] font-jetbrains text-ink-muted mt-2">
                       Read 7.4 GB/s · Write 6.8 GB/s
                     </div>
                   </div>
                 </div>
 
                 {/* Provisioning Feed */}
-                <div className="p-3 bg-slate-900/40 rounded-lg border border-slate-800/80 font-jetbrains text-[11px] space-y-1 text-slate-400">
-                  <div className="text-slate-500">{'// CLUSTER_DEPLOYMENT_FEED'}</div>
-                  <div className="text-slate-300">
+                <div className="p-3 bg-paper-raised/60 border border-rule font-jetbrains text-[11px] space-y-1 text-ink-muted">
+                  <div className="text-ink-muted/70">{'// CLUSTER_DEPLOYMENT_FEED'}</div>
+                  <div className="text-ink">
                     <span className="text-emerald-400">✓</span> node/k8s-worker-01: pod autoscale target satisfied
                   </div>
-                  <div className="text-slate-300">
+                  <div className="text-ink">
                     <span className="text-emerald-400">✓</span> storage/nvme-pool: snapshot encrypted [AES-256]
                   </div>
                 </div>
@@ -237,35 +240,35 @@ export default function SovereignCloudConsole() {
                 transition={{ duration: 0.2 }}
                 className="space-y-4"
               >
-                <div className="p-4 rounded-lg bg-slate-900/80 border border-slate-800 flex items-start gap-3.5">
-                  <div className="w-9 h-9 rounded-lg bg-rose-950/60 border border-rose-800/50 flex items-center justify-center flex-shrink-0">
-                    <Shield className="w-4 h-4 text-zyniq-red" />
+                <div className="p-4 bg-paper-raised border border-rule flex items-start gap-3.5">
+                  <div className="w-9 h-9 bg-red/10 border border-red/30 flex items-center justify-center flex-shrink-0">
+                    <Shield className="w-4 h-4 text-red" />
                   </div>
                   <div>
-                    <div className="text-xs font-semibold text-slate-200 flex items-center gap-2">
+                    <div className="text-xs font-semibold text-ink flex items-center gap-2">
                       <span>Dark Matter Protocol Active</span>
-                      <span className="px-1.5 py-0.5 rounded text-[10px] font-jetbrains bg-rose-950 text-rose-300 border border-rose-800/40">
+                      <span className="px-1.5 py-0.5 text-[10px] font-jetbrains bg-red/10 text-red border border-red/30">
                         Zero-Trust
                       </span>
                     </div>
-                    <p className="text-[11px] text-slate-400 mt-1 leading-relaxed">
+                    <p className="text-[11px] text-ink-muted mt-1 leading-relaxed">
                       Continuous packet heuristics scanning every ingress port. 0 anomalous payloads admitted to the hypervisor plane.
                     </p>
                   </div>
                 </div>
 
                 <div className="grid grid-cols-3 gap-2 font-jetbrains text-[10px]">
-                  <div className="p-2.5 rounded bg-slate-900/40 border border-slate-800 text-center">
-                    <div className="text-slate-500">DDoS CAPACITY</div>
-                    <div className="text-xs font-bold text-slate-200 mt-0.5">10 Tbps</div>
+                  <div className="p-2.5 bg-paper-raised border border-rule text-center">
+                    <div className="text-ink-muted">DDoS CAPACITY</div>
+                    <div className="text-xs font-bold text-ink mt-0.5">10 Tbps</div>
                   </div>
-                  <div className="p-2.5 rounded bg-slate-900/40 border border-slate-800 text-center">
-                    <div className="text-slate-500">ISOLATION</div>
+                  <div className="p-2.5 bg-paper-raised border border-rule text-center">
+                    <div className="text-ink-muted">ISOLATION</div>
                     <div className="text-xs font-bold text-emerald-400 mt-0.5">Hardware</div>
                   </div>
-                  <div className="p-2.5 rounded bg-slate-900/40 border border-slate-800 text-center">
-                    <div className="text-slate-500">ENCRYPTION</div>
-                    <div className="text-xs font-bold text-slate-200 mt-0.5">GCM-256</div>
+                  <div className="p-2.5 bg-paper-raised border border-rule text-center">
+                    <div className="text-ink-muted">ENCRYPTION</div>
+                    <div className="text-xs font-bold text-ink mt-0.5">GCM-256</div>
                   </div>
                 </div>
               </motion.div>
@@ -273,13 +276,13 @@ export default function SovereignCloudConsole() {
           </AnimatePresence>
 
           {/* Console Bottom Action Footer */}
-          <div className="mt-4 pt-3.5 border-t border-slate-900 flex items-center justify-between">
-            <span className="font-jetbrains text-[10px] text-slate-500">
+          <div className="mt-4 pt-3.5 border-t border-rule flex items-center justify-between">
+            <span className="font-jetbrains text-[10px] text-ink-muted">
               CLUSTER ARCHITECTURE // V4.2 SOVEREIGN
             </span>
             <a
               href="#services"
-              className="inline-flex items-center gap-1 text-[11px] font-medium text-slate-300 hover:text-white transition-colors"
+              className="inline-flex items-center gap-1 text-[11px] font-medium text-ink-muted hover:text-ink transition-colors"
             >
               <span>Explore infrastructure</span>
               <ArrowUpRight className="w-3.5 h-3.5" />

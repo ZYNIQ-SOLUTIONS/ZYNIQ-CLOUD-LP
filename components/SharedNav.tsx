@@ -27,7 +27,7 @@ const routes = [
     subtitle: 'DARK MATTER INFRASTRUCTURE',
     cta: 'LAUNCH CLOUD',
     ctaHref: '#deploy-cloud',
-    signLogo: 'https://media-bucket-cdn.zyniq.solutions/brand-assets/ZYNIQ_SIGN_LOGO_BLACK.png',
+    signLogo: '/brand/zyniq-cloud-logo.svg',
     textLogo: 'https://media-bucket-cdn.zyniq.solutions/brand-assets/CLOUD_TEXT_LOGO.png',
     bgClass: '',
   },

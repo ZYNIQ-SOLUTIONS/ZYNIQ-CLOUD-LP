@@ -9,7 +9,7 @@ import Link from 'next/link'
 /* ------------------------------------------------------------------ */
 const products = [
   { id: 'core',      label: 'CORE',      color: '#EA2323', href: '/core' },
-  { id: 'cloud',     label: 'CLOUD',     color: '#2a9d8f', href: '/cloud' },
+  { id: 'cloud',     label: 'CLOUD',     color: '#EA2323', href: '/cloud' },
   { id: 'solutions', label: 'SOLUTIONS', color: '#457b9d', href: '/solutions' },
   { id: 'studio',    label: 'STUDIO',    color: '#f4a261', href: '/studio' },
 ]
@@ -87,8 +87,8 @@ export default function Navbar() {
   const switcherRef = useRef<HTMLDivElement>(null)
   const logoRef = useRef<HTMLDivElement>(null)
 
-  // Determine dark/light theme based on route
-  const isLight = pathname === '/solutions' || pathname === '/cloud'
+  // Determine dark/light theme based on route (/cloud is dark architecture)
+  const isLight = pathname === '/solutions'
   const themeClass = isLight ? '' : 'z-navbar--dark'
 
   // Auto-detect product from current route
@@ -153,8 +153,8 @@ export default function Navbar() {
         <div ref={logoRef} className="z-navbar__logo" onClick={toggleSwitcher}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={isLight
-              ? 'https://media-bucket-cdn.zyniq.solutions/brand-assets/ZYNIQ_SIGN_LOGO_RED.png'
+            src={pathname === '/cloud'
+              ? '/brand/zyniq-cloud-logo.svg'
               : 'https://media-bucket-cdn.zyniq.solutions/brand-assets/ZYNIQ_SIGN_LOGO_RED.png'
             }
             alt="ZYNIQ"
@@ -243,7 +243,10 @@ export default function Navbar() {
                 <div className="z-menu-hub__center">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src="https://media-bucket-cdn.zyniq.solutions/brand-assets/ZYNIQ_SIGN_LOGO_RED.png"
+                    src={pathname === '/cloud'
+                      ? '/brand/zyniq-cloud-logo.svg'
+                      : 'https://media-bucket-cdn.zyniq.solutions/brand-assets/ZYNIQ_SIGN_LOGO_RED.png'
+                    }
                     alt="ZYNIQ"
                     className="z-menu-hub__center-logo"
                   />
