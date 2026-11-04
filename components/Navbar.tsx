@@ -1,293 +1,187 @@
 'use client'
 
-import { useState, useEffect, useCallback, useRef } from 'react'
-import { usePathname } from 'next/navigation'
-import Link from 'next/link'
+import { useEffect, useState } from 'react'
+import { ArrowRight, Menu, X } from 'lucide-react'
+import { ZyniqTextLogo } from '@/components/ZyniqTextLogo'
 
-/* ------------------------------------------------------------------ */
-/*  PRODUCT CONFIG — brand colors per ZYNIQ product                    */
-/* ------------------------------------------------------------------ */
-const products = [
-  { id: 'core',      label: 'CORE',      color: '#EA2323', href: '/core' },
-  { id: 'cloud',     label: 'CLOUD',     color: '#EA2323', href: '/cloud' },
-  { id: 'solutions', label: 'SOLUTIONS', color: '#457b9d', href: '/solutions' },
-  { id: 'studio',    label: 'STUDIO',    color: '#f4a261', href: '/studio' },
+const STATIONS = [
+  { id: 'services', number: '01', label: 'Services' },
+  { id: 'architecture', number: '02', label: 'Architecture' },
+  { id: 'security', number: '03', label: 'Security' },
+  { id: 'pricing', number: '04', label: 'Pricing' },
+  { id: 'compliance', number: '05', label: 'Compliance' },
 ]
 
-/* ------------------------------------------------------------------ */
-/*  MENU NAV LINKS                                                     */
-/* ------------------------------------------------------------------ */
-const leftLinks = [
-  { label: 'Solutions',    href: '/solutions' },
-  { label: 'Network',      href: '/core#network' },
-  { label: 'Intelligence', href: '/core#intelligence' },
-  { label: 'Platform',     href: '/studio' },
-  { label: 'Security',     href: '/core#security' },
-]
-
-const rightLinks = [
-  { label: 'Global',     href: '/cloud' },
-  { label: 'Enterprise', href: '/solutions#enterprise' },
-  { label: 'Analytics',  href: '/core#analytics' },
-  { label: 'Resources',  href: '/core#resources' },
-  { label: 'Contact',    href: '/core#contact' },
-  { label: 'WAITLIST',   href: '/cloud#waitlist', isHighlight: true },
-]
-
-/* ------------------------------------------------------------------ */
-/*  NODE CONFIG — center hub network nodes                             */
-/* ------------------------------------------------------------------ */
-const leftNodes = [
-  {
-    label: 'Analysis',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <path d="M21 12H3m18-6H3m18 12H3" />
-      </svg>
-    ),
-  },
-  {
-    label: 'Architecture',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-      </svg>
-    ),
-  },
-]
-
-const rightNodes = [
-  {
-    label: 'Deployment',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <path d="M5 12h14M5 12l4-4m-4 4l4 4" />
-      </svg>
-    ),
-  },
-  {
-    label: 'Database',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <path d="M20 7H4m16 5H4m16 5H4" />
-      </svg>
-    ),
-  },
-]
-
-/* ================================================================== */
-/*  NAVBAR COMPONENT                                                   */
-/* ================================================================== */
 export default function Navbar() {
-  const pathname = usePathname()
-  const [menuOpen, setMenuOpen] = useState(false)
-  const [switcherOpen, setSwitcherOpen] = useState(false)
-  const [productColor, setProductColor] = useState('#EA2323')
-  const [productName, setProductName] = useState('CORE RED')
-  const switcherRef = useRef<HTMLDivElement>(null)
-  const logoRef = useRef<HTMLDivElement>(null)
+  const [open, setOpen] = useState(false)
+  const [activeId, setActiveId] = useState<string | null>(null)
 
-  // Determine dark/light theme based on route (/cloud is dark architecture)
-  const isLight = pathname === '/solutions'
-  const themeClass = isLight ? '' : 'z-navbar--dark'
-
-  // Auto-detect product from current route
+  // Track scroll position to update active station in header
   useEffect(() => {
-    const match = products.find((p) => pathname?.startsWith(p.href))
-    if (match) {
-      setProductColor(match.color)
-      setProductName(match.label)
-    }
-  }, [pathname])
-
-  // Close switcher on outside click
-  useEffect(() => {
-    function handleClick(e: MouseEvent) {
-      if (
-        switcherRef.current &&
-        logoRef.current &&
-        !switcherRef.current.contains(e.target as Node) &&
-        !logoRef.current.contains(e.target as Node)
-      ) {
-        setSwitcherOpen(false)
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + 200
+      for (let i = STATIONS.length - 1; i >= 0; i--) {
+        const el = document.getElementById(STATIONS[i].id)
+        if (el && el.offsetTop <= scrollPosition) {
+          setActiveId(STATIONS[i].id)
+          return
+        }
       }
+      setActiveId(null)
     }
-    document.addEventListener('click', handleClick)
-    return () => document.removeEventListener('click', handleClick)
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    handleScroll()
+    return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Lock body scroll when menu is open
+  // Lock body scroll while mobile drawer is open; close on Escape or desktop resize
   useEffect(() => {
-    document.body.style.overflow = menuOpen ? 'hidden' : ''
-    return () => { document.body.style.overflow = '' }
-  }, [menuOpen])
-
-  const toggleMenu = useCallback(() => {
-    setMenuOpen((prev) => !prev)
-    setSwitcherOpen(false)
-  }, [])
-
-  const toggleSwitcher = useCallback((e: React.MouseEvent) => {
-    e.stopPropagation()
-    setSwitcherOpen((prev) => !prev)
-  }, [])
-
-  const selectProduct = useCallback((color: string, label: string) => {
-    setProductColor(color)
-    setProductName(label)
-    setTimeout(() => setSwitcherOpen(false), 300)
-  }, [])
-
-  const closeMenu = useCallback(() => {
-    setMenuOpen(false)
-  }, [])
-
-  // CSS custom property for product color
-  const colorStyle = { '--z-nav-product': productColor } as React.CSSProperties
+    if (!open) return
+    const desktop = window.matchMedia('(min-width: 1024px)')
+    const close = () => setOpen(false)
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && close()
+    document.body.style.overflow = 'hidden'
+    window.addEventListener('keydown', onKey)
+    desktop.addEventListener('change', close)
+    return () => {
+      document.body.style.overflow = ''
+      window.removeEventListener('keydown', onKey)
+      desktop.removeEventListener('change', close)
+    }
+  }, [open])
 
   return (
-    <>
-      {/* ─── FIXED NAVBAR ─── */}
-      <nav className={`z-navbar ${themeClass}`} style={colorStyle}>
-        {/* Logo */}
-        <div ref={logoRef} className="z-navbar__logo" onClick={toggleSwitcher}>
+    <header className="sticky top-0 z-50 bg-paper/90 backdrop-blur-md border-b border-rule">
+      <div className="mx-auto max-w-7xl h-16 px-5 sm:px-8 lg:px-10 flex items-center justify-between gap-4">
+        {/* Brand Lockup: Logo Badge + Text Logo + CLOUD Product Label */}
+        <a href="#top" className="flex items-center gap-2.5 h-11 shrink-0" aria-label="ZYNIQ Cloud, back to top">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={pathname === '/cloud'
-              ? '/brand/zyniq-cloud-logo.svg'
-              : 'https://media-bucket-cdn.zyniq.solutions/brand-assets/ZYNIQ_SIGN_LOGO_RED.png'
-            }
-            alt="ZYNIQ"
-            className="z-navbar__logo-img"
+            src="/brand/zyniq-cloud-logo.svg"
+            alt="ZYNIQ Logo"
+            className="w-8 h-8 rounded-lg object-contain shadow-sm"
           />
-        </div>
+          <ZyniqTextLogo className="h-4 w-auto" />
+          <span className="font-display font-black text-xl leading-none tracking-wide text-red translate-y-px">
+            CLOUD
+          </span>
+        </a>
 
-        {/* Logo Switcher */}
-        <div
-          ref={switcherRef}
-          className={`z-navbar__switcher ${switcherOpen ? 'z-navbar__switcher--active' : ''}`}
-        >
-          {products.map((p) => (
-            <button
-              key={p.id}
-              className="z-navbar__switcher-item"
-              onClick={() => selectProduct(p.color, p.label)}
-              title={p.label}
-            >
-              <svg viewBox="0 0 100 100">
-                <rect x="10" y="10" width="80" height="80" fill={p.color} />
-              </svg>
-            </button>
-          ))}
-        </div>
+        {/* Desktop Stations Navigation */}
+        <nav aria-label="Main" className="hidden lg:flex items-center gap-7 font-mono text-xs text-ink-muted">
+          {STATIONS.map((s) => {
+            const isActive = s.id === activeId
+            return (
+              <a
+                key={s.id}
+                href={`#${s.id}`}
+                aria-current={isActive ? 'location' : undefined}
+                className={`py-1 border-b-2 transition-colors ${
+                  isActive ? 'text-ink border-red' : 'border-transparent hover:text-ink'
+                }`}
+              >
+                <span className={`mr-1.5 ${isActive ? 'text-red font-semibold' : 'text-ink-muted'}`}>
+                  {s.number}
+                </span>
+                {s.label}
+              </a>
+            )
+          })}
+          <a
+            href="https://zyniq.blog"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="py-1 border-b-2 border-transparent hover:text-ink transition-colors flex items-center gap-1"
+          >
+            <span>Blog</span>
+            <span className="text-[10px] text-ink-muted">↗</span>
+          </a>
+        </nav>
 
-        {/* Hamburger */}
-        <button
-          className={`z-navbar__trigger ${menuOpen ? 'z-navbar__trigger--active' : ''}`}
-          onClick={toggleMenu}
-          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-          aria-expanded={menuOpen}
-        >
-          <span />
-          <span />
-          <span />
-        </button>
-      </nav>
-
-      {/* ─── FULL-SCREEN MENU MODAL ─── */}
-      <div
-        className={`z-menu-modal ${menuOpen ? 'z-menu-modal--active' : ''}`}
-        onClick={(e) => { if (e.target === e.currentTarget) closeMenu() }}
-      >
-        <div className="z-menu-modal__content">
-          <div className="z-menu-modal__body">
-            {/* Left Sidebar */}
-            <div className="z-menu-sidebar z-menu-sidebar--left">
-              {leftLinks.map((link, i) => (
-                <Link
-                  key={link.label}
-                  href={link.href}
-                  className="z-menu-sidebar__btn"
-                  style={{ transitionDelay: `${0.1 + i * 0.05}s` }}
-                  onClick={closeMenu}
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </div>
-
-            {/* Center Network Hub */}
-            <div className="z-menu-hub">
-              {/* Blueprint decoration lines */}
-              <div className="z-menu-hub__decor">
-                <svg viewBox="0 0 800 500" preserveAspectRatio="none">
-                  <line x1="50" y1="50" x2="400" y2="250" />
-                  <line x1="50" y1="450" x2="400" y2="250" />
-                  <line x1="750" y1="50" x2="400" y2="250" />
-                  <line x1="750" y1="450" x2="400" y2="250" />
-                </svg>
-              </div>
-
-              <div className="z-menu-hub__grid">
-                {/* Left Nodes */}
-                <div className="z-menu-hub__column">
-                  {leftNodes.map((node) => (
-                    <div key={node.label} className="z-menu-hub__node">
-                      <div className="z-menu-hub__node-icon">{node.icon}</div>
-                      <span className="z-menu-hub__node-text">{node.label}</span>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Center Logo */}
-                <div className="z-menu-hub__center">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={pathname === '/cloud'
-                      ? '/brand/zyniq-cloud-logo.svg'
-                      : 'https://media-bucket-cdn.zyniq.solutions/brand-assets/ZYNIQ_SIGN_LOGO_RED.png'
-                    }
-                    alt="ZYNIQ"
-                    className="z-menu-hub__center-logo"
-                  />
-                </div>
-
-                {/* Right Nodes */}
-                <div className="z-menu-hub__column">
-                  {rightNodes.map((node) => (
-                    <div key={node.label} className="z-menu-hub__node">
-                      <div className="z-menu-hub__node-icon">{node.icon}</div>
-                      <span className="z-menu-hub__node-text">{node.label}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Right Sidebar */}
-            <div className="z-menu-sidebar z-menu-sidebar--right">
-              {rightLinks.map((link, i) => (
-                <Link
-                  key={link.label}
-                  href={link.href}
-                  className={`z-menu-sidebar__btn ${(link as any).isHighlight ? 'z-menu-sidebar__btn--highlight' : ''}`}
-                  style={{ transitionDelay: `${0.35 + i * 0.05}s` }}
-                  onClick={closeMenu}
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          {/* Modal Footer */}
-          <div className="z-menu-modal__footer">
-            <span>&copy; {new Date().getFullYear()} ZYNIQ INDUSTRIES</span>
-            <span>ACTIVE: {productName.toUpperCase()}</span>
-            <span>SECURE TERMINAL // V4.1</span>
-          </div>
+        {/* Action Controls & Mobile Trigger */}
+        <div className="flex items-center sm:gap-3">
+          <a
+            href="#deploy-cloud"
+            className="hidden sm:inline-flex items-center gap-2 bg-red text-white text-sm font-medium hover:bg-ink hover:text-paper px-4 h-9 bp-btn"
+          >
+            Launch Cloud
+            <ArrowRight className="w-3.5 h-3.5" />
+          </a>
+          <button
+            type="button"
+            className="lg:hidden w-11 h-11 -mr-2.5 inline-flex items-center justify-center text-ink-muted hover:text-ink cursor-pointer"
+            aria-label={open ? 'Close menu' : 'Open menu'}
+            aria-expanded={open}
+            aria-controls="mobile-menu"
+            onClick={() => setOpen(!open)}
+          >
+            {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
         </div>
       </div>
-    </>
+
+      {/* Mobile Menu Drawer */}
+      {open && (
+        <nav
+          id="mobile-menu"
+          aria-label="Mobile"
+          className="lg:hidden absolute top-16 inset-x-0 h-[calc(100dvh-4rem)] overflow-y-auto overscroll-contain bg-paper bp-grid border-t border-rule flex flex-col px-5 sm:px-8"
+          style={{ paddingBottom: 'max(1.25rem, env(safe-area-inset-bottom))' }}
+        >
+          <p className="bp-label pt-6 pb-2">Stations index</p>
+          <ul className="border-t border-ink font-display font-black uppercase text-2xl sm:text-3xl">
+            {STATIONS.map((s) => {
+              const isActive = s.id === activeId
+              return (
+                <li key={s.id} className="border-b border-rule">
+                  <a
+                    href={`#${s.id}`}
+                    onClick={() => setOpen(false)}
+                    aria-current={isActive ? 'location' : undefined}
+                    className="flex items-baseline gap-4 py-4"
+                  >
+                    <span className={`font-mono text-xs ${isActive ? 'text-red font-semibold' : 'text-ink-muted'}`}>
+                      {s.number}
+                    </span>
+                    <span className="flex-1 text-ink">{s.label}</span>
+                    {isActive && <span className="bp-label text-red self-center">Current</span>}
+                  </a>
+                </li>
+              )
+            })}
+            <li className="border-b border-rule">
+              <a
+                href="https://zyniq.blog"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setOpen(false)}
+                className="flex items-baseline gap-4 py-4 hover:text-red transition-colors"
+              >
+                <span className="font-mono text-xs text-ink-muted">↗</span>
+                <span className="flex-1 text-ink">Blog</span>
+              </a>
+            </li>
+          </ul>
+
+          <div className="mt-auto pt-8 pb-6">
+            <a
+              href="#deploy-cloud"
+              onClick={() => setOpen(false)}
+              className="flex items-center justify-center gap-2 bg-red text-white text-sm font-medium hover:bg-ink hover:text-paper h-12 px-6 bp-btn shadow-lg shadow-red/20"
+            >
+              Launch Cloud
+              <ArrowRight className="w-4 h-4" />
+            </a>
+            <div className="mt-4 flex flex-wrap items-center justify-between gap-x-4 bp-label text-ink-muted">
+              <a href="mailto:contact@zyniq.cloud" className="inline-flex items-center min-h-11 text-ink hover:text-red transition-colors">
+                contact@zyniq.cloud
+              </a>
+              <span>HQ: Dubai, UAE</span>
+            </div>
+          </div>
+        </nav>
+      )}
+    </header>
   )
 }

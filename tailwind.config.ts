@@ -22,10 +22,13 @@ const config: Config = {
         grid: 'var(--grid)',
         red: 'var(--red)',
       },
-      // Landing pages specific: Space Grotesk alias + jetbrains alias
       fontFamily: {
-        space: ['Space Grotesk', 'sans-serif'],
-        jetbrains: ['JetBrains Mono', 'monospace'],
+        sans: ['"Inter Tight"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+        display: ['"Big Shoulders Display"', '"Orbitron"', 'sans-serif'],
+        space: ['"Space Grotesk"', 'sans-serif'],
+        jetbrains: ['"JetBrains Mono"', 'monospace'],
+        orbitron: ['Orbitron', 'sans-serif'],
       },
     },
   },

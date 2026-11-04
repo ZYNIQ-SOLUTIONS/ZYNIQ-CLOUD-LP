@@ -1,184 +1,120 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import Link from 'next/link'
-import Image from 'next/image'
+import { ZyniqTextLogo } from '@/components/ZyniqTextLogo'
+
+const CELL = 'p-6 sm:p-8 border-rule'
+const LINK = 'inline-flex items-center hover:text-red transition-colors text-ink-muted hover:text-ink'
+
+const STATIONS = [
+  { id: 'services', number: '01', label: 'Services' },
+  { id: 'architecture', number: '02', label: 'Architecture' },
+  { id: 'security', number: '03', label: 'Security' },
+  { id: 'pricing', number: '04', label: 'Pricing' },
+  { id: 'compliance', number: '05', label: 'Compliance' },
+  { id: 'deploy-cloud', number: '06', label: 'Deploy Cloud' },
+]
+
+const SOCIALS = [
+  { name: 'X / Twitter', href: 'https://twitter.com/zyniq' },
+  { name: 'GitHub', href: 'https://github.com/zyniq' },
+  { name: 'LinkedIn', href: 'https://linkedin.com/company/zyniq' },
+  { name: 'Discord', href: 'https://discord.gg/zyniq' },
+]
 
 export default function Footer() {
-  const [time, setTime] = useState('')
-
-  useEffect(() => {
-    const updateTime = () => {
-      const now = new Date()
-      setTime(now.toUTCString())
-    }
-    updateTime()
-    const interval = setInterval(updateTime, 1000)
-    return () => clearInterval(interval)
-  }, [])
-
   return (
-    <footer className="relative bg-zyniq-void text-white pt-24 pb-0 overflow-hidden border-t border-white/10">
-      {/* Giant Background Watermark */}
-      <div className="absolute -bottom-10 -right-10 text-[18vw] font-black font-orbitron text-white select-none pointer-events-none leading-none opacity-5">
-        ZYNIQ
-      </div>
-
-      <div className="container mx-auto px-6 relative z-10 pb-20">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
-          {/* Brand Column */}
-          <div className="col-span-1 md:col-span-4 flex flex-col justify-between">
-            <div>
-              <div className="flex items-center gap-3 mb-6">
+    <footer className="border-t border-rule pt-12 sm:pt-16 pb-12 overflow-hidden bg-paper">
+      <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
+        <div className="border border-ink bg-paper-raised">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12">
+            {/* Col 1: Brand & Sovereignty Statement */}
+            <div className={`${CELL} lg:col-span-5 border-b lg:border-b-0 lg:border-r`}>
+              <div className="flex items-center gap-2.5">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="https://media-bucket-cdn.zyniq.solutions/brand-assets/ZYNIQ_LOGO_EMERGED.png"
-                  alt="ZYNIQ Industries"
-                  className="h-14 w-auto object-contain"
+                  src="/brand/zyniq-cloud-logo.svg"
+                  alt="ZYNIQ Logo"
+                  className="w-8 h-8 rounded-lg object-contain shadow-sm"
                 />
+                <ZyniqTextLogo className="h-4 w-auto" />
+                <span className="font-display font-black text-xl leading-none tracking-wide text-red translate-y-px">
+                  CLOUD
+                </span>
               </div>
-              <p className="text-sm text-white/60 leading-relaxed mb-6 font-space">
-                The Future Coded By Us. Independent Intelligence. Zero-Dependency Cloud.
+              <p className="mt-4 text-sm text-ink-muted font-sans leading-relaxed max-w-sm">
+                Sovereign cloud compute, zero-dependency infrastructure, and dedicated GPU clusters engineered in Dubai for absolute data sovereignty and autonomous execution.
               </p>
-              <div className="space-y-2 text-xs font-jetbrains text-white/40">
-                <div>FOUNDED: 2024</div>
-                <div>STATUS: OPERATIONAL</div>
-                <div>CLEARANCE: LEVEL-7</div>
+              <div className="mt-5 space-y-1 bp-label">
+                <div>STATUS: <span className="text-emerald-500 font-semibold">OPERATIONAL</span></div>
+                <div>CLEARANCE: <span className="text-red font-semibold">LEVEL-7 SOVEREIGN</span></div>
               </div>
             </div>
-          </div>
 
-          {/* Navigation Columns */}
-          <div className="col-span-1 md:col-span-2">
-            <h4 className="section-title mb-4">ECOSYSTEM</h4>
-            <ul className="space-y-2 text-sm font-space">
-              <li>
-                <Link
-                  href="/core"
-                  className="text-white/60 hover:text-zyniq-red transition-colors cursor-none-target"
-                >
-                  ZYNIQ Core
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/cloud"
-                  className="text-white/60 hover:text-zyniq-red transition-colors cursor-none-target"
-                >
-                  ZYNIQ Cloud
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/solutions"
-                  className="text-white/60 hover:text-zyniq-red transition-colors cursor-none-target"
-                >
-                  ZYNIQ Solutions
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/studio"
-                  className="text-white/60 hover:text-zyniq-red transition-colors cursor-none-target"
-                >
-                  ZYNIQ Studio
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div className="col-span-1 md:col-span-2">
-            <h4 className="section-title mb-4">PROTOCOLS</h4>
-            <ul className="space-y-2 text-sm font-space">
-              <li>
-                <Link
-                  href="/privacy"
-                  className="text-white/60 hover:text-zyniq-red transition-colors cursor-none-target"
-                >
-                  Privacy Policy
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/terms"
-                  className="text-white/60 hover:text-zyniq-red transition-colors cursor-none-target"
-                >
-                  Terms of Service
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/cookies"
-                  className="text-white/60 hover:text-zyniq-red transition-colors cursor-none-target"
-                >
-                  Cookie Policy
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Newsletter / Social */}
-          <div className="col-span-1 md:col-span-4">
-            <h4 className="section-title mb-4">SIGNAL SUBSCRIPTION</h4>
-            <p className="text-xs text-white/60 mb-4 font-space">
-              Receive system updates, product launches, and classified intelligence.
-            </p>
-            <form className="space-y-3">
-              <div className="relative">
-                <input
-                  type="email"
-                  placeholder="ENTER_COMMAND_KEY"
-                  className="w-full bg-white/5 border border-white/20 focus:border-zyniq-red px-4 py-3 text-sm font-jetbrains text-white placeholder:text-white/30 outline-none transition-colors"
-                />
-                <div className="absolute inset-0 border border-transparent focus-within:border-zyniq-red pointer-events-none" />
-              </div>
-              <button
-                type="submit"
-                className="w-full btn-ghost cursor-none-target"
-              >
-                SUBSCRIBE
-              </button>
-            </form>
-
-            {/* Social Links */}
-            <div className="mt-8">
-              <h5 className="text-[10px] font-orbitron font-bold text-white/40 tracking-wider mb-3">
-                CONNECT
-              </h5>
-              <div className="flex gap-4">
-                {['Twitter', 'LinkedIn', 'GitHub'].map((platform) => (
-                  <a
-                    key={platform}
-                    href="#"
-                    className="w-10 h-10 border border-white/20 hover:border-zyniq-red flex items-center justify-center text-white/60 hover:text-zyniq-red transition-colors cursor-none-target group"
-                  >
-                    <span className="font-orbitron text-[10px] font-bold">
-                      {platform[0]}
-                    </span>
-                  </a>
+            {/* Col 2: Stations Index */}
+            <div className={`${CELL} lg:col-span-3 border-b md:border-b-0 md:border-l lg:border-l-0 lg:border-r`}>
+              <h3 className="bp-label mb-3 font-semibold text-ink">Index</h3>
+              <ul className="grid grid-cols-2 gap-x-4 sm:block space-y-2 font-mono text-xs">
+                {STATIONS.map((s) => (
+                  <li key={s.id}>
+                    <a href={`#${s.id}`} className={LINK}>
+                      <span className="text-red mr-2 font-semibold">{s.number}</span>
+                      <span>{s.label}</span>
+                    </a>
+                  </li>
                 ))}
+                <li>
+                  <a href="https://zyniq.blog" target="_blank" rel="noopener noreferrer" className={LINK}>
+                    <span className="text-red mr-2 font-semibold">↗</span>
+                    <span>Blog</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* Col 3: Contact & HQ */}
+            <div className={`${CELL} lg:col-span-4 border-b md:border-b-0 min-w-0`}>
+              <h3 className="bp-label mb-3 font-semibold text-ink">Contact</h3>
+              <ul className="space-y-2 font-mono text-xs">
+                <li className="truncate">
+                  <a href="mailto:contact@zyniq.cloud" className={LINK}>
+                    contact@zyniq.cloud
+                  </a>
+                </li>
+                <li className="truncate">
+                  <a href="mailto:security@zyniq.cloud" className={LINK}>
+                    security@zyniq.cloud
+                  </a>
+                </li>
+              </ul>
+              <div className="mt-5 bp-label space-y-1">
+                <div>HQ: Dubai, United Arab Emirates</div>
+                <div>FOUNDED: 2024</div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
 
-      {/* Data Ticker */}
-      <div className="border-t border-white/10 bg-zyniq-black/50 py-2 relative z-10 overflow-hidden">
-        <div className="whitespace-nowrap animate-scroll-text flex gap-8 text-[10px] font-jetbrains text-gray-500 font-bold tracking-widest">
-          <span>{`// SERVER_TIME: ${time}`}</span>
-          <span>{'// HASH: 8f4a2c9e1b7d'}</span>
-          <span>{'// MEMORY: 64TB [OK]'}</span>
-          <span>{'// UPTIME: 99.999%'}</span>
-          <span>{'// COPYRIGHT © 2024 ZYNIQ INDUSTRIES'}</span>
-          <span>{'// SECURE_CONNECTION_ESTABLISHED'}</span>
-          {/* Duplicate for seamless loop */}
-          <span>{`// SERVER_TIME: ${time}`}</span>
-          <span>{'// HASH: 8f4a2c9e1b7d'}</span>
-          <span>{'// MEMORY: 64TB [OK]'}</span>
-          <span>{'// UPTIME: 99.999%'}</span>
-          <span>{'// COPYRIGHT © 2024 ZYNIQ INDUSTRIES'}</span>
-          <span>{'// SECURE_CONNECTION_ESTABLISHED'}</span>
+            {/* Col 4: Channels */}
+            <div className={`${CELL} md:col-span-2 lg:col-span-12 border-t border-rule`}>
+              <h3 className="bp-label mb-3 font-semibold text-ink">Channels</h3>
+              <ul className="grid grid-cols-2 gap-x-4 sm:flex sm:flex-wrap sm:gap-x-6 gap-y-2 font-mono text-xs">
+                {SOCIALS.map((s) => (
+                  <li key={s.name}>
+                    <a href={s.href} target="_blank" rel="noopener noreferrer" className={LINK}>
+                      {s.name} ↗
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* Bottom Bar */}
+          <div className="px-6 sm:px-8 py-4 flex flex-col sm:flex-row justify-between items-center gap-3 border-t border-rule bp-label">
+            <span>&copy; {new Date().getFullYear()} ZYNIQ Industries. All rights reserved.</span>
+            <span className="flex gap-6">
+              <span className="text-ink-muted">Terms of service</span>
+              <span className="text-ink-muted">Privacy policy</span>
+            </span>
+          </div>
         </div>
       </div>
     </footer>
