@@ -1,7 +1,5 @@
 'use client'
 
-import { ZyniqTextLogo } from '@/components/ZyniqTextLogo'
-
 const CELL = 'p-6 sm:p-8 border-rule'
 const LINK = 'inline-flex items-center hover:text-red transition-colors text-ink-muted hover:text-ink'
 
@@ -29,17 +27,13 @@ export default function Footer() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12">
             {/* Col 1: Brand & Sovereignty Statement */}
             <div className={`${CELL} lg:col-span-5 border-b lg:border-b-0 lg:border-r`}>
-              <div className="flex items-center gap-2.5">
+              <div className="flex items-center">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/brand/zyniq-cloud-logo.svg"
-                  alt="ZYNIQ Logo"
-                  className="w-8 h-8 rounded-lg object-contain shadow-sm"
+                  src="/brand/zyniq-footer-logo.svg"
+                  alt="ZYNIQ"
+                  className="h-8 sm:h-9 w-auto max-w-[260px] object-contain"
                 />
-                <ZyniqTextLogo className="h-4 w-auto" />
-                <span className="font-display font-black text-xl leading-none tracking-wide text-red translate-y-px">
-                  CLOUD
-                </span>
               </div>
               <p className="mt-4 text-sm text-ink-muted font-sans leading-relaxed max-w-sm">
                 Sovereign cloud compute, zero-dependency infrastructure, and dedicated GPU clusters engineered in Dubai for absolute data sovereignty and autonomous execution.
@@ -109,7 +103,7 @@ export default function Footer() {
 
           {/* Bottom Bar */}
           <div className="px-6 sm:px-8 py-4 flex flex-col sm:flex-row justify-between items-center gap-3 border-t border-rule bp-label">
-            <span>&copy; {new Date().getFullYear()} ZYNIQ Industries. All rights reserved.</span>
+            <span>&copy; {new Date().getFullYear()} ZYNIQ Cloud. All rights reserved.</span>
             <span className="flex gap-6">
               <span className="text-ink-muted">Terms of service</span>
               <span className="text-ink-muted">Privacy policy</span>

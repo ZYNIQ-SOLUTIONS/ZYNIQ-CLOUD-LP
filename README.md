@@ -74,5 +74,5 @@ ZYNIQ-CLOUD-LP/
 
 ---
 
-© ZYNIQ Industries. All rights reserved.
+© 2026 ZYNIQ Cloud. All rights reserved.
 # ZYNIQ-CLOUD-LP

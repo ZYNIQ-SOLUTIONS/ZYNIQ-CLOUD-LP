@@ -617,12 +617,12 @@ body {
 .zl-sign-svg {
   width: clamp(75px, 16vw, 115px);
   height: auto;
-  filter: drop-shadow(0 0 25px rgba(210, 31, 31, 0.45));
+  filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.2));
 }
 
 .zl-sign-path {
   stroke: #ffffff;
-  fill: #EA2323;
+  fill: #000000;
   fill-opacity: 0;
   stroke-dasharray: 3000;
   stroke-dashoffset: 3000;
@@ -646,7 +646,8 @@ body {
 @keyframes zlFillSign {
   to {
     fill-opacity: 1;
-    stroke-width: 0;
+    stroke: #ffffff;
+    stroke-width: 4px;
   }
 }
 
@@ -654,7 +655,7 @@ body {
   position: absolute;
   inset: -16px;
   border-radius: 50%;
-  border: 0.5px solid rgba(210, 31, 31, 0.2);
+  border: 0.5px solid rgba(255, 255, 255, 0.15);
   animation: zlRingPulse 3s ease-in-out 1.8s infinite;
   opacity: 0;
 }
@@ -711,8 +712,8 @@ body {
 }
 
 .zl-wm-red {
-  stroke: #EA2323;
-  fill: #EA2323;
+  stroke: #ECE8DD;
+  fill: #000000;
 }
 
 .zl-wm-path:nth-child(1) { animation-delay: 1.4s, 2.8s; }
@@ -731,7 +732,8 @@ body {
 @keyframes zlFillWM {
   to {
     fill-opacity: 1;
-    stroke-width: 0;
+    stroke: #ECE8DD;
+    stroke-width: 8px;
   }
 }
 

@@ -54,7 +54,7 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 bg-paper/90 backdrop-blur-md border-b border-rule">
       <div className="mx-auto max-w-7xl h-16 px-5 sm:px-8 lg:px-10 flex items-center justify-between gap-4">
-        {/* Brand Lockup: Logo Badge + Text Logo + CLOUD Product Label */}
+        {/* Brand Lockup: Matching user screenshot */}
         <a href="#top" className="flex items-center gap-2.5 h-11 shrink-0" aria-label="ZYNIQ Cloud, back to top">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
