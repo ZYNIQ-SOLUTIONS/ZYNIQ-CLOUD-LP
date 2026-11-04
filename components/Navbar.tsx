@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react'
 import { ArrowRight, Menu, X } from 'lucide-react'
-import { ZyniqTextLogo } from '@/components/ZyniqTextLogo'
 
 const STATIONS = [
   { id: 'services', number: '01', label: 'Services' },
@@ -54,18 +53,14 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 bg-paper/90 backdrop-blur-md border-b border-rule">
       <div className="mx-auto max-w-7xl h-16 px-5 sm:px-8 lg:px-10 flex items-center justify-between gap-4">
-        {/* Brand Lockup: Matching user screenshot */}
-        <a href="#top" className="flex items-center gap-2.5 h-11 shrink-0" aria-label="ZYNIQ Cloud, back to top">
+        {/* Brand App Logo */}
+        <a href="#top" className="flex items-center h-11 shrink-0" aria-label="ZYNIQ Cloud, back to top">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/brand/zyniq-cloud-logo.svg"
-            alt="ZYNIQ Logo"
-            className="w-8 h-8 rounded-lg object-contain shadow-sm"
+            alt="ZYNIQ Cloud"
+            className="w-9 h-9 sm:w-10 sm:h-10 object-contain hover:opacity-90 transition-opacity"
           />
-          <ZyniqTextLogo className="h-4 w-auto" />
-          <span className="font-display font-black text-xl leading-none tracking-wide text-red translate-y-px">
-            CLOUD
-          </span>
         </a>
 
         {/* Desktop Stations Navigation */}
